@@ -39,6 +39,7 @@
     "build": "npm run post-css && react-scripts build",
     "lint": "eslint src",
     "fix": "eslint --fix src",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
