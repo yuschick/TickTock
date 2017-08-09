@@ -9,6 +9,7 @@
     "eslint-config-google": "^0.7.1",
     "eslint-config-prettier": "^2.1.1",
     "eslint-plugin-prettier": "^2.1.1",
+    "gh-pages": "^1.0.0",
     "lint-staged": "^3.5.1",
     "postcss-cli": "^4.0.0",
     "prettier": "^1.3.1",
@@ -43,5 +44,6 @@
   },
   "browserslist": [
     "last 3 versions"
-  ]
+  ],
+  "homepage": "http://yuschick.github.io/TickTock/"
 }
