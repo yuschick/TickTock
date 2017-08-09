@@ -10,7 +10,7 @@ class Header extends Component {
       <header className='main-header'>
         <div className='container flex-container is-spread'>
           <h2>
-            <Link to="/">
+            <Link to="/TickTock/">
               TickTock
               <span> JS</span>
             </Link>

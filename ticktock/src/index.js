@@ -16,9 +16,9 @@ ReactDOM.render(
     <div>
       <Header />
       <main>
-        <Route exact path='/' component={Home} />
-        <Route exact path="/docs" component={Docs}/>
-        <Route exact path="/guides" component={Guides}/>
+        <Route exact path='/TickTock/' component={Home} />
+        <Route exact path="/TickTock/docs" component={Docs}/>
+        <Route exact path="/TickTock/guides" component={Guides}/>
       </main>
       <Footer />
     </div>
