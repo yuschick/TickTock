@@ -315,6 +315,18 @@
 .bottom-center {
   transform-origin: 125px 179px; }
 
+#start-pause-btn {
+  transform: translate(0, 0);
+  transition: transform 0.05s ease; }
+  #start-pause-btn.active {
+    transform: translate(-3px, 2px); }
+
+#reset-btn {
+  transform: translate(0, 0);
+  transition: transform 0.05s ease; }
+  #reset-btn.active {
+    transform: translate(-3px, -2px); }
+
 #primary-hour-hand,
 #primary-minute-hand,
 #primary-second-hand {

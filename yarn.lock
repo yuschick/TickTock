@@ -6493,9 +6493,9 @@ through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-ticktock-js@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/ticktock-js/-/ticktock-js-2.5.1.tgz#16d239af89544caeaf38cb7c2a8217fd52bce552"
+ticktock-js@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/ticktock-js/-/ticktock-js-2.5.2.tgz#3d6d216fdb768ab736570b586ecbd70751edd078"
 
 time-stamp@^2.0.0:
   version "2.0.0"

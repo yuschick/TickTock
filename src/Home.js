@@ -56,13 +56,13 @@ class Home extends Component {
             <h4 className='is-light'>Complications</h4>
               <SecondaryNav active={this.state.activeDemo} update={this.updateActiveDemo} />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='dials' demo='dial-demo' active={this.state.activeDemo === 'dials'} docs='dials-overview'  />
-              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='perpetual-calendar' demo='perpetual-calendar-demo' active={this.state.activeDemo === 'perpetual-calendar'} docs='calendars-header'  />
-              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='chronograph' demo='chronograph-demo' active={this.state.activeDemo === 'chronograph'} docs='chronograph-header'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='perpetual-calendar' demo='perpetual-calendar-demo' active={this.state.activeDemo === 'perpetual-calendar'} docs='calendars-overview'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='chronograph' demo='chronograph-demo' active={this.state.activeDemo === 'chronograph'} docs='chronograph-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='day-night-indicator' demo='day-night-indicator-demo' active={this.state.activeDemo === 'day-night-indicator'} docs='day-night-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='manual-time' demo='manual-time-demo' active={this.state.activeDemo === 'manual-time'} docs='crown-overview'  />
-              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='minute-repeater' demo='minute-repeater-demo' active={this.state.activeDemo === 'minute-repeater'} docs='minute-repeater-header'  />
-              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='moonphase' demo='moonphase-demo' active={this.state.activeDemo === 'moonphase'} docs='moonphase-header'  />
-              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='power-reserve' demo='power-reserve-demo' active={this.state.activeDemo === 'power-reserve'} docs='reserve-header'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='minute-repeater' demo='minute-repeater-demo' active={this.state.activeDemo === 'minute-repeater'} docs='minute-repeater-overview'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='moonphase' demo='moonphase-demo' active={this.state.activeDemo === 'moonphase'} docs='moonphase-overview'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='power-reserve' demo='power-reserve-demo' active={this.state.activeDemo === 'power-reserve'} docs='reserve-overview'  />
             </div>
           </section>
           <section className='panel container'>

@@ -23,7 +23,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "ticktock-js": "^2.5.1"
+    "ticktock-js": "^2.5.2"
   },
   "lint-staged": {
     "*.js": [
@@ -37,6 +37,7 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run post-css && react-scripts build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint src",
     "fix": "eslint --fix src",
     "test": "react-scripts test --env=jsdom",

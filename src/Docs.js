@@ -12,6 +12,7 @@ class Docs extends Component {
     this.checkScrollPosition = this.checkScrollPosition.bind(this);
     this.toggleDocTreeGroups = this.toggleDocTreeGroups.bind(this);
     this.triggerScrollEvent = this.triggerScrollEvent.bind(this);
+    this.scrollToView = this.scrollToView.bind(this);
 
     this.state = {
       fixed: false,
@@ -73,6 +74,32 @@ class Docs extends Component {
             {
               label: 'Year - Offset Months',
               anchor: 'year-offsetmonths',
+            },
+          ],
+        },
+        {
+          header: 'Chronograph',
+          active: false,
+          items: [
+            {
+              label: 'Overview',
+              anchor: 'chronograph-overview',
+            },
+            {
+              label: 'Define the Hands',
+              anchor: 'chronograph-definethehands',
+            },
+            {
+              label: 'Define the Buttons',
+              anchor: 'chronograph-definethebuttons',
+            },
+            {
+              label: 'Flyback Chronograph',
+              anchor: 'chronograph-flyback',
+            },
+            {
+              label: 'Button Active States',
+              anchor: 'chronograph-activestates',
             },
           ],
         },
@@ -238,6 +265,23 @@ class Docs extends Component {
     }
   }
 
+  componentWillMount() {
+    window.addEventListener('scroll', this.triggerScrollEvent);
+  }
+
+  componentDidMount() {
+    const anchor = this.props.location.hash;
+    if (anchor) this.scrollToView(anchor.replace('#',''));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.triggerScrollEvent);
+  }
+
+  scrollToView(id) {
+    document.getElementById(id).scrollIntoView();
+  }
+
   toggleDocTreeGroups(showGroup) {
     const docTreeGroups = document.querySelectorAll('.menu-group');
     docTreeGroups.forEach(group => {
@@ -252,6 +296,7 @@ class Docs extends Component {
   checkScrollPosition(pos) {
     const gettingStarted = this.gettingStartedSection;
     const calendarSection = this.calendarsSection;
+    const chronographSection = this.chronographSection;
     const indicatorSection = this.dayNightSection;
     const dialsSection = this.dialsSection;
     const crownSection = this.crownSection;
@@ -269,7 +314,9 @@ class Docs extends Component {
       this.toggleDocTreeGroups('getting-started');
     } else if (pos > gettingStarted.offsetTop + gettingStarted.clientHeight && pos < calendarSection.offsetTop + calendarSection.clientHeight) {
       this.toggleDocTreeGroups('calendars');
-    } else if (pos > calendarSection.offsetTop + calendarSection.clientHeight && pos < indicatorSection.offsetTop + indicatorSection.clientHeight) {
+    } else if (pos > calendarSection.offsetTop + calendarSection.clientHeight && pos < chronographSection.offsetTop + chronographSection.clientHeight) {
+      this.toggleDocTreeGroups('chronograph');
+    } else if (pos > chronographSection.offsetTop + chronographSection.clientHeight && pos < indicatorSection.offsetTop + indicatorSection.clientHeight) {
       this.toggleDocTreeGroups('day-night-indicator');
     } else if (pos > indicatorSection.offsetTop + indicatorSection.clientHeight && pos < dialsSection.offsetTop + dialsSection.clientHeight) {
       this.toggleDocTreeGroups('dials');
@@ -284,14 +331,6 @@ class Docs extends Component {
     } else {
       this.toggleDocTreeGroups('watch');
     }
-  }
-
-  componentWillMount() {
-    window.addEventListener('scroll', this.triggerScrollEvent);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.triggerScrollEvent);
   }
 
   triggerScrollEvent() {
@@ -534,6 +573,96 @@ let demo = new Watch(settings);`}
   }
 };`}
               </CodeBlock>
+            </DocSection>
+          </section>
+
+          <section ref={section => this.chronographSection = section}>
+            <DocSection groupHeader='Chronograph' subHeader='Overview' anchor='chronograph-overview'>
+              <DocSpecs property='chronograph' />
+              <p>A chronograph is a specific type of watch that is used as a stopwatch combined with a display watch. A basic chronograph has an independent sweep second hand; it can be started, stopped, and returned to zero by successive pressure on the stem.</p>
+              <p>The chronograph functionality is triggered with buttons to start/pause and another to reset the hands. There are many variations of chronographs but TickTock expects the start button to be clicked multiple times to pause and resume. A separate reset button will stop the chronograph and reposition all hands to their original state (which TickTock expects to be at the 12 o${String.fromCharCode(39)}clock position). An exception to this is when the chronograph is set be function as a flyback chronograph in which case the reset button returns the hands to their original position but then continues running - for example, if timing laps around a track.</p>
+              <p>The <span className='is-code-ref'>chronograph</span> objects expects properties for the <span className='is-code-ref'>hands</span>, <span className='is-code-ref'>buttons</span>, and optionally a <span className='is-code-ref'>flyback</span> boolean.</p>
+              <CodeBlock>
+{`settings = {
+  dials: [{
+      name: 'primary',
+      hands: {
+        hour: 'chrono-dial-hour-hand',
+        minute: 'chrono-dial-minute-hand',
+        second: 'chrono-dial-second-hand',
+      },
+      sweep: true,
+    },
+  ],
+  chronograph: {
+    buttons: {
+      start: 'start-pause-btn',
+      reset: 'reset-btn',
+    },
+    hands: {
+      tenth: 'chrono-tenth-second-hand',
+      second: 'chrono-second-hand',
+      minute: 'chrono-minute-hand',
+    },
+  },
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Define the Hands' anchor='chronograph-definethehands'>
+              <DocSpecs property='hands' required='True' />
+              <p>The <span className='is-code-ref'>chronograph</span> object expects a <span className='is-code-ref'>hands</span> object to create references based on element IDs. TickTock supports hands for tenth seconds, seconds, and minutes. Each property should be a string containing the individual hand element ID.</p>
+              <CodeBlock>
+{`settings = {
+  ...
+  chronograph: {
+    hands: {
+      tenth: 'chrono-tenth-second-hand',
+      second: 'chrono-second-hand',
+      minute: 'chrono-minute-hand',
+    },
+  },
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Define the Buttons' anchor='chronograph-definethebuttons'>
+              <DocSpecs property='buttons' required='True' />
+              <p>The <span className='is-code-ref'>chronograph</span> object expects a <span className='is-code-ref'>buttons</span> object to create references based on element IDs.</p>
+              <p>The buttons can be any HTML element as long as it has an ID to pass to TickTock. The <span className='is-code-ref'>start</span> button acts as a toggle between starting and pausing the chronograph.</p>
+              <p>The <span className='is-code-ref'>reset</span> button by default will stop the chronograph and return the hands to their original positions, which are expected to be at the 12 o{String.fromCharCode(39)}clock position. However, this functionality can be altered by using the <span className='is-code-ref'>flyback</span> property which will then cause the reset button to merely return the hands to their original positions to immediately begin running again without pauing the chronograph.</p>
+              <p>Clicking on a button will add an <span className='is-code-ref'>active</span> class to the element. TickTock does this by default as well as adds a <span className='is-code-ref'>transitionend</span> event listener to each button so a pressing animation can be achieved by adding in the CSS styles to the elements and allowing TickTock to toggle the classes.</p>
+              <CodeBlock>
+{`settings = {
+  ...
+  chronograph: {
+    ...
+    buttons: {
+      start: 'start-pause-btn',
+      reset: 'reset-btn',
+    },
+  },
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Flyback Chronograph' anchor='chronograph-flyback'>
+              <DocSpecs property='flyback' type='Boolean' required='False' def='False' />
+              <p>When pressing the reset button on many chronographs, the chronograph stops and the hands return to their original positions. However, a variation of this is the flyback chronograph. Aimed more at timing spits between laps, pressing the reset button on a flyback chronograph will return the hands to their original positions where they will immediately begin running again.</p>
+              <p>To fully reset a flyback chronograph, the functionality must be paused prior to pressing reset.</p>
+              <CodeBlock>
+{`settings = {
+  ...
+  chronograph: {
+    ...
+    flyback: true,
+  },
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Button Active States' anchor='chronograph-activestates'>
+              <p>Clicking on a button will add an <span className='is-code-ref'>active</span> class to the element. TickTock does this by default as well as adds a <span className='is-code-ref'>transitionend</span> event listener to each button so a pressing animation can be achieved by adding in the CSS styles to the elements and allowing TickTock to toggle the classes.</p>
             </DocSection>
           </section>
 

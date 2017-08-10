@@ -61,7 +61,15 @@ let demo = new Watch(settings);
           desc = [
             {
               key: 'chronograph-01',
-              text: 'The dials are the primary component in TickTock. A dial serves as a collection of hand elements and settings used to indicate the time by rotating the hands or discs according to the local time, the provided GMT offset, or the manually set time. Perhaps the most powerful feature is the ability to include multiple dials in one watch as the example shows.',
+              text: 'A chronograph is a specific type of watch that is used as a stopwatch combined with a display watch. A basic chronograph has an independent sweep second hand; it can be started, stopped, and returned to zero by successive pressure on the stem.',
+            },
+            {
+              key: 'chronograph-02',
+              text: `In the demo, the standard time is represented with the minute and hour hands on the primary dial and the second hand at the 6 o${String.fromCharCode(39)}clock position. The chronograph is represented with the teal hand on the primary dial that will tick every tenth of a second and the two dials at 3 and 9 o${String.fromCharCode(39)}clock for the chronograph minutes and seconds.`,
+            },
+            {
+              key: 'chronograph-03',
+              text: `The chronograph is activated by clicking on the button between 1 and 2 o${String.fromCharCode(39)}clock. Clicking the button again will toggle pausing and resuming the functionality. At any point, clicking the button between 4 and 5 o${String.fromCharCode(39)}clock will stop the chronograph and reset the hands to their original positions. Ticktock expects all hands to be drawn in their 12 o${String.fromCharCode(39)}clock position initially.`,
             },
           ];
 
@@ -299,7 +307,7 @@ let demo = new Watch(settings);
             })
           }
           <div className='flex-container'>
-            <Button type='primary' text='View Docs' url={`./docs.html#${this.props.docs}`} />
+            <Button type='primary' text='View Docs' url={`./docs#${this.props.docs}`} />
             <Button type='primary view-code-btn' text='Toggle Code' url='#' data={this.props.demo} action={this.props.toggle} />
           </div>
           <section className={`complication code-block-container ${!this.props.showCode ? 'is-hidden' : ''}`} data-type={this.props.demo}>
