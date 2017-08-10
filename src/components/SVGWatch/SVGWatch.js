@@ -164,9 +164,9 @@ class SVGWatch extends Component {
           repeater: {
             id: 'play-repeater',
             chimes: {
-              hour: './dist/sounds/chime-01.mp4',
-              quarter: './dist/sounds/chime-02.mp4',
-              minute: './dist/sounds/chime-03.mp4',
+              hour: './sounds/chime-01.mp4',
+              quarter: './sounds/chime-02.mp4',
+              minute: './sounds/chime-03.mp4',
             },
           },
         };
