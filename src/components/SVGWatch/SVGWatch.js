@@ -322,7 +322,7 @@ class SVGWatch extends Component {
         <g id="chrono-second-hand" className="left-center">
           <path className="chrono-st0" d="M69.8 125c-0.2-3.1-0.4-6.1-0.6-9.1l-0.4-9.2c-0.1-3.1-0.5-6.1-0.3-9.1 0.2-3.1 0.5-6.1 1.3-9.2h0.3c0.8 3.1 1.1 6.1 1.3 9.2 0.2 3-0.2 6.1-0.3 9.1l-0.4 9.2c-0.2 3-0.4 6.1-0.6 9.1H69.8z"/>
         </g>
-        <g id="chrono-minute-hand" className="rigt-center">
+        <g id="chrono-minute-hand" className="right-center">
           <path className="chrono-st0" d="M179.9 123.8c-0.2-3.1-0.4-6.1-0.6-9.2l-0.4-9.1c-0.1-3.1-0.5-6.1-0.3-9.2 0.2-3 0.5-6.1 1.4-9.1h0.3c0.8 3.1 1.1 6.1 1.4 9.1 0.2 3.1-0.2 6.1-0.3 9.2l-0.4 9.1c-0.2 3.1-0.4 6.1-0.6 9.2H179.9z"/>
         </g>
         <g id="chrono-dial-second-hand" className="bottom-center">
