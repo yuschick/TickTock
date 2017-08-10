@@ -318,8 +318,6 @@ class SVGWatch extends Component {
         <path className="chrono-st0" d="M70 88.4c20.2 0 36.6 16.4 36.6 36.6S90.2 161.6 70 161.6 33.4 145.2 33.4 125 49.8 88.4 70 88.4M70 87.2c-20.9 0-37.8 16.9-37.8 37.8s16.9 37.8 37.8 37.8 37.8-16.9 37.8-37.8S90.9 87.2 70 87.2L70 87.2z"/>
         <path className="chrono-st3" d="M180 162.3c-20.5 0-37.2-16.7-37.2-37.2s16.7-37.2 37.2-37.2 37.2 16.7 37.2 37.2S200.5 162.3 180 162.3z"/>
         <path className="chrono-st0" d="M180 88.4c20.2 0 36.6 16.4 36.6 36.6s-16.4 36.6-36.6 36.6 -36.6-16.4-36.6-36.6S159.8 88.4 180 88.4M180 87.2c-20.9 0-37.8 16.9-37.8 37.8s16.9 37.8 37.8 37.8 37.8-16.9 37.8-37.8S200.9 87.2 180 87.2L180 87.2z"/>
-        <rect id="chrono-dial-minute-hand" x="123" y="15.2" className="chrono-st0 primary-center" width="4" height="110"/>
-        <rect id="chrono-dial-hour-hand" x="121.5" y="46.3" width="7" height="79" className="primary-center" />
         <rect id="chrono-tenth-second-hand" x="124" y="15.2" className="chrono-st4 primary-center" width="2" height="110"/>
         <g id="chrono-second-hand" className="left-center">
           <path className="chrono-st0" d="M69.8 125c-0.2-3.1-0.4-6.1-0.6-9.1l-0.4-9.2c-0.1-3.1-0.5-6.1-0.3-9.1 0.2-3.1 0.5-6.1 1.3-9.2h0.3c0.8 3.1 1.1 6.1 1.3 9.2 0.2 3-0.2 6.1-0.3 9.1l-0.4 9.2c-0.2 3-0.4 6.1-0.6 9.1H69.8z"/>
@@ -330,6 +328,8 @@ class SVGWatch extends Component {
         <g id="chrono-dial-second-hand" className="bottom-center">
           <path className="chrono-st3" d="M124.9 179.1c-0.2-3.1-0.4-6.1-0.6-9.2l-0.4-9.1c-0.1-3.1-0.5-6.1-0.3-9.2 0.2-3 0.5-6.1 1.4-9.1h0.3c0.8 3.1 1.1 6.1 1.4 9.1 0.2 3.1-0.2 6.1-0.3 9.2l-0.4 9.1c-0.2 3.1-0.4 6.1-0.6 9.2H124.9z"/>
         </g>
+        <rect id="chrono-dial-minute-hand" x="123" y="15.2" className="chrono-st0 primary-center" width="4" height="110"/>
+        <rect id="chrono-dial-hour-hand" x="121.5" y="46.3" width="7" height="79" className="primary-center" />
       </svg>
     );
   }
