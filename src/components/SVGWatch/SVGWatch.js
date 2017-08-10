@@ -16,6 +16,7 @@ class SVGWatch extends Component {
     this.getMinuteRepeaterDemo = this.getMinuteRepeaterDemo.bind(this);
     this.getMoonphaseDemo = this.getMoonphaseDemo.bind(this);
     this.getReserveDemo = this.getReserveDemo.bind(this);
+    this.getChronographDemo = this.getChronographDemo.bind(this);
     this.getFirstWatch = this.getFirstWatch.bind(this);
   }
 
@@ -61,6 +62,31 @@ class SVGWatch extends Component {
                 sweep: true,
               },
             ],
+          };
+        break;
+      case 'chronograph':
+          settings = {
+            dials: [{
+                name: 'primary',
+                hands: {
+                  hour: 'chrono-dial-hour-hand',
+                  minute: 'chrono-dial-minute-hand',
+                  second: 'chrono-dial-second-hand',
+                },
+                sweep: true,
+              },
+            ],
+            chronograph: {
+              buttons: {
+                start: 'start-pause-btn',
+                reset: 'reset-btn',
+              },
+              hands: {
+                tenth: 'chrono-tenth-second-hand',
+                second: 'chrono-second-hand',
+                minute: 'chrono-minute-hand',
+              },
+            },
           };
         break;
       case 'perpetual-calendar':
@@ -263,6 +289,47 @@ class SVGWatch extends Component {
         <rect className='primary-center st7' id="dial-primary-second-hand" x="123.3" y="15.2" width="2" height="110"/>
         <rect className='primary-center st8' id="dial-primary-minute-hand" x="123.3" y="15.2" width="4" height="110"/>
         <rect className='primary-center' id="dial-primary-hour-hand" x="121.8" y="46.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 250.6448 171.5)" width="7" height="79"/>
+      </svg>
+    );
+  }
+
+  getChronographDemo() {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 250 250" xmlSpace="preserve">
+        <path id="reset-btn" className="chrono-st0" d="M168.8 206.5l43.2 24.9c5.7 3.3 13.1 1.3 16.4-4.4l10.5-18.2c3.3-5.7 1.3-13.1-4.4-16.4l-43.2-24.9c-5.7-3.3-13.1-1.3-16.4 4.4l-10.5 18.2C161.1 195.8 163.1 203.2 168.8 206.5z"/>
+        <path id="start-pause-btn" className="chrono-st0" d="M234.5 57.6l-43.2 24.9c-5.7 3.3-13.1 1.3-16.4-4.4l-10.5-18.2c-3.3-5.7-1.3-13.1 4.4-16.4L212 18.6c5.7-3.3 13.1-1.3 16.4 4.4l10.5 18.2C242.2 46.9 240.2 54.3 234.5 57.6z"/>
+        <path className="chrono-st1" d="M125 245C58.8 245 5 191.2 5 125S58.8 5 125 5s120 53.8 120 120S191.2 245 125 245z"/>
+        <path d="M125 10c30.7 0 59.6 12 81.3 33.7S240 94.3 240 125s-12 59.6-33.7 81.3S155.7 240 125 240s-59.6-12-81.3-33.7S10 155.7 10 125s12-59.6 33.7-81.3S94.3 10 125 10M125 0C56 0 0 56 0 125s56 125 125 125 125-56 125-125S194 0 125 0L125 0z"/>
+        <line className="chrono-st2" x1="125.3" y1="0.2" x2="125.3" y2="29.2"/>
+        <line className="chrono-st2" x1="125.3" y1="220.8" x2="125.3" y2="249.8"/>
+        <line className="chrono-st2" x1="187.7" y1="17" x2="173.2" y2="42.1"/>
+        <line className="chrono-st2" x1="77.4" y1="207.9" x2="62.9" y2="233"/>
+        <line className="chrono-st2" x1="233.4" y1="62.6" x2="208.2" y2="77.1"/>
+        <line className="chrono-st2" x1="42.4" y1="172.9" x2="17.3" y2="187.4"/>
+        <line className="chrono-st2" x1="250.1" y1="125" x2="221.1" y2="125"/>
+        <line className="chrono-st2" x1="29.6" y1="125" x2="0.6" y2="125"/>
+        <line className="chrono-st2" x1="233.4" y1="187.4" x2="208.2" y2="172.9"/>
+        <line className="chrono-st2" x1="42.4" y1="77.1" x2="17.3" y2="62.6"/>
+        <line className="chrono-st2" x1="187.7" y1="233" x2="173.2" y2="207.9"/>
+        <line className="chrono-st2" x1="77.4" y1="42.1" x2="62.9" y2="17"/>
+        <path className="chrono-st0" d="M125 217c-20.5 0-37.2-16.7-37.2-37.2s16.7-37.2 37.2-37.2 37.2 16.7 37.2 37.2S145.5 217 125 217z"/>
+        <path className="chrono-st0" d="M125 143.1c20.2 0 36.6 16.4 36.6 36.6s-16.4 36.6-36.6 36.6 -36.6-16.4-36.6-36.6S104.8 143.1 125 143.1M125 141.9c-20.9 0-37.8 16.9-37.8 37.8s16.9 37.8 37.8 37.8 37.8-16.9 37.8-37.8S145.9 141.9 125 141.9L125 141.9z"/>
+        <path className="chrono-st3" d="M70 162.3c-20.5 0-37.2-16.7-37.2-37.2S49.5 87.9 70 87.9s37.2 16.7 37.2 37.2S90.5 162.3 70 162.3z"/>
+        <path className="chrono-st0" d="M70 88.4c20.2 0 36.6 16.4 36.6 36.6S90.2 161.6 70 161.6 33.4 145.2 33.4 125 49.8 88.4 70 88.4M70 87.2c-20.9 0-37.8 16.9-37.8 37.8s16.9 37.8 37.8 37.8 37.8-16.9 37.8-37.8S90.9 87.2 70 87.2L70 87.2z"/>
+        <path className="chrono-st3" d="M180 162.3c-20.5 0-37.2-16.7-37.2-37.2s16.7-37.2 37.2-37.2 37.2 16.7 37.2 37.2S200.5 162.3 180 162.3z"/>
+        <path className="chrono-st0" d="M180 88.4c20.2 0 36.6 16.4 36.6 36.6s-16.4 36.6-36.6 36.6 -36.6-16.4-36.6-36.6S159.8 88.4 180 88.4M180 87.2c-20.9 0-37.8 16.9-37.8 37.8s16.9 37.8 37.8 37.8 37.8-16.9 37.8-37.8S200.9 87.2 180 87.2L180 87.2z"/>
+        <rect id="chrono-dial-minute-hand" x="123" y="15.2" className="chrono-st0 primary-center" width="4" height="110"/>
+        <rect id="chrono-dial-hour-hand" x="121.5" y="46.3" width="7" height="79" className="primary-center" />
+        <rect id="chrono-tenth-second-hand" x="124" y="15.2" className="chrono-st4 primary-center" width="2" height="110"/>
+        <g id="chrono-second-hand" className="left-center">
+          <path className="chrono-st0" d="M69.8 125c-0.2-3.1-0.4-6.1-0.6-9.1l-0.4-9.2c-0.1-3.1-0.5-6.1-0.3-9.1 0.2-3.1 0.5-6.1 1.3-9.2h0.3c0.8 3.1 1.1 6.1 1.3 9.2 0.2 3-0.2 6.1-0.3 9.1l-0.4 9.2c-0.2 3-0.4 6.1-0.6 9.1H69.8z"/>
+        </g>
+        <g id="chrono-minute-hand" className="rigt-center">
+          <path className="chrono-st0" d="M179.9 123.8c-0.2-3.1-0.4-6.1-0.6-9.2l-0.4-9.1c-0.1-3.1-0.5-6.1-0.3-9.2 0.2-3 0.5-6.1 1.4-9.1h0.3c0.8 3.1 1.1 6.1 1.4 9.1 0.2 3.1-0.2 6.1-0.3 9.2l-0.4 9.1c-0.2 3.1-0.4 6.1-0.6 9.2H179.9z"/>
+        </g>
+        <g id="chrono-dial-second-hand" className="bottom-center">
+          <path className="chrono-st3" d="M124.9 179.1c-0.2-3.1-0.4-6.1-0.6-9.2l-0.4-9.1c-0.1-3.1-0.5-6.1-0.3-9.2 0.2-3 0.5-6.1 1.4-9.1h0.3c0.8 3.1 1.1 6.1 1.4 9.1 0.2 3.1-0.2 6.1-0.3 9.2l-0.4 9.1c-0.2 3.1-0.4 6.1-0.6 9.2H124.9z"/>
+        </g>
       </svg>
     );
   }
@@ -660,7 +727,6 @@ class SVGWatch extends Component {
         <line id="primary-hour-hand" className="first-watch-st9 primary-center" x1="122" y1="121.5" x2="122" y2="50.5"/>
         <circle id="center-circle" cx="122" cy="122" r="9"/>
       </svg>
-
     );
   }
 
@@ -676,6 +742,9 @@ class SVGWatch extends Component {
         break;
       case 'perpetual-calendar':
         watch = this.getPerpetualCalendarDemo();
+        break;
+      case 'chronograph':
+        watch = this.getChronographDemo();
         break;
       case 'day-night-indicator':
         watch = this.getDayNightDemo();

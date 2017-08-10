@@ -10,6 +10,9 @@ class SecondaryNav extends Component {
           <li className={this.props.active === 'perpetual-calendar' ? 'active' : ''} onClick={() => {this.props.update('perpetual-calendar')}}>
             <span>Calendars</span>
           </li>
+          <li className={this.props.active === 'chronograph' ? 'active' : ''} onClick={() => {this.props.update('chronograph')}}>
+            <span>Chronograph</span>
+          </li>
           <li className={this.props.active === 'dials' ? 'active' : ''} onClick={() => {this.props.update('dials')}}>
             <span>Dials</span>
           </li>

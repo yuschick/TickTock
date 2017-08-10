@@ -57,6 +57,38 @@ class ComplicationContainer extends Component {
 let demo = new Watch(settings);
 `;
         break;
+        case 'chronograph':
+          desc = [
+            {
+              key: 'chronograph-01',
+              text: 'The dials are the primary component in TickTock. A dial serves as a collection of hand elements and settings used to indicate the time by rotating the hands or discs according to the local time, the provided GMT offset, or the manually set time. Perhaps the most powerful feature is the ability to include multiple dials in one watch as the example shows.',
+            },
+          ];
+
+          code = `settings = {
+  dials: [{
+      name: 'primary',
+      hands: {
+        hour: 'hour-hand',
+        minute: 'minute-hand',
+        second: 'second-hand',
+      },
+      sweep: true,
+    },
+  ],
+  chronograph: {
+    buttons: {
+      start: 'start-pause-btn',
+      reset: 'reset-btn',
+    },
+    hands: {
+      tenth: 'chrono-tenth-second-hand',
+      second: 'chrono-second-hand',
+      minute: 'chrono-minute-hand',
+    },
+  },
+};`;
+          break;
       case 'perpetual-calendar':
         desc = [
           {
