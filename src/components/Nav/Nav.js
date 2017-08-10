@@ -9,10 +9,10 @@ class Nav extends Component {
         <nav className="primary-nav">
           <ul className="flex-container">
             <li>
-              <NavLink to="/docs">Docs</NavLink>
+              <NavLink to="/TickTock/docs">Docs</NavLink>
             </li>
             <li>
-              <NavLink to="/guides">Guides</NavLink>
+              <NavLink to="/TickTock/guides">Guides</NavLink>
             </li>
             <li>
               <a href="https://github.com/yuschick/TickTock">Github</a>
