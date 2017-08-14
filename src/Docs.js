@@ -150,6 +150,10 @@ class Docs extends Component {
               anchor: 'dials-gmtoffsets',
             },
             {
+              label: 'Defining a Timezone',
+              anchor: 'dials-timezone',
+            },
+            {
               label: '12/24-Hour Formats',
               anchor: 'dials-hourformats',
             },
@@ -820,7 +824,8 @@ let demo = new Watch(settings);`}
 
             <DocSection subHeader='GMT Offsets' anchor='dials-gmtoffsets'>
               <DocSpecs property='offset' type='String' />
-              <p>TickTock defaults to the local timezone by using JavaScript{String.fromCharCode(39)}s native Date() object. However, a dial can be given a specific GMT offset value to override this default.</p>
+              <p className='is-strong'>WIll be deprecated in v3.0 in lieu of the timezone property</p>
+              <p>TickTock defaults to the local timezone by using Moment JS'{String.fromCharCode(39)} default date object. However, a dial can be given a specific GMT offset value to override this default.</p>
               <p>The <span className='is-code-ref'>offset</span> property is a string supporting both negative and positive values. The values are relative to the Greenwich Mean Time (GMT). So to set a dial to show the time in New York City the offset property would have a value of {String.fromCharCode(39)}-5{String.fromCharCode(39)}. Whereas showing the time in Singapore would be {String.fromCharCode(39)}+8{String.fromCharCode(39)}.</p>
               <p>Decimal values are also supported. For example, Delhi would have an <span className='is-code-ref'>offset</span> value of {String.fromCharCode(39)}+5.3{String.fromCharCode(39)}.</p>
               <CodeBlock>
@@ -834,6 +839,25 @@ let demo = new Watch(settings);`}
     }
   }],
   offset: '+2' // Helsinki, Finland
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Defining a Timezone' anchor='dials-timezone'>
+              <DocSpecs property='timezone' type='String' />
+              <p>The <span className='is-code-ref'>timezone</span> property was added to ultimately replace the <span className='is-code-ref'>offset</span> property. This property accepts a string of the target timezone. Using MomentJS and Moment Timezone, this new property can take into account Daylight Savings as well as give a more intuitive way of specifying a secondary timezone.</p>
+              <p>All accepted timezone values can be found on the <a href='https://github.com/moment/moment-timezone/blob/develop/data/packed/latest.json' target='new'>Moment-Timezone repo</a>.</p>
+              <CodeBlock>
+  {`let settings = {
+  dials: [{
+    name: 'primary-dial',
+    hands: {
+      hour: 'element-id',
+      minute: 'element-id',
+      second: 'element-id'
+    }
+  }],
+  timezone: 'America/New_York'
 };`}
               </CodeBlock>
             </DocSection>

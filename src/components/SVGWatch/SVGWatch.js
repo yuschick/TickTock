@@ -58,7 +58,7 @@ class SVGWatch extends Component {
                   minute: 'dial-secondary-minute-hand',
                   second: 'dial-secondary-second-hand',
                 },
-                offset: '+6',
+                timezone: 'America/New_York',
                 sweep: true,
               },
             ],
