@@ -48,6 +48,7 @@ class Home extends Component {
               <div className='code-block-container'>
                 <code>npm install ticktock-js --save-dev</code>
               </div>
+              <img src='https://badge.fury.io/js/ticktock-js.svg' alt='Latest TickTock Version' />
             </section>
           </div>
         </section>

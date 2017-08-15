@@ -44,6 +44,10 @@ class Docs extends Component {
               anchor: 'date-defineasplitdisplay',
             },
             {
+              label: 'Date - Retrograde Display',
+              anchor: 'date-retrogradedisplay',
+            },
+            {
               label: 'Day - Overview',
               anchor: 'day-overview',
             },
@@ -457,6 +461,27 @@ let demo = new Watch(settings);`}
     split: {
       ones: 'ones-disc',
       tenths: 'tenths-disc'
+    }
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Date - Retrograde Display' anchor='date-retrogradedisplay'>
+              <DocSpecs property='retrograde' />
+              <p>Retrograde displays are slightly common as a way to tell the date without the use of a full, circular disc. A retrograde display consists of a hand that rotates along a partial circle and upon reaching the end it jumps back to its original position.</p>
+              <p>The <span className='is-code-ref'>retrograde</span> object supports one property, <span className='is-code-ref'>max</span>, which is a number. TickTock expects the indicator to be drawn at its starting position which will be treated as 0 degrees. The <span className='is-code-ref'>max</span> value defines how far the hand must rotate before reaching its end. The <span className='is-code-ref'>max</span> value will be divided by 31 and the indiator will be rotated according to that value per the date.</p>
+              <p>The <span className='is-code-ref'>max</span> property can be considered optional. If no value is assigned, TickTock will default to <span className='is-code-ref'>180</span>. Given this, the <span className='is-code-ref'>retrograde</span> property could be given a <span className='is-code-ref'>true</span> boolean value instead of an object.</p>
+              <p>
+                Note that the <span className='is-code-ref'>Date</span> property accepts <span className='is-strong'>either</span> a <span className='is-code-ref'>split</span> or <span className='is-code-ref'>retrograde</span> property. Including both will result in an error. When using the retrograde display, an <span className='is-code-ref'>id</span> property is value is still required.
+              </p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  date: {
+    id: 'date-arrow',
+    retrograde: {
+      max: 210
     }
   }
 };`}
