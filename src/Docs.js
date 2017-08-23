@@ -60,12 +60,20 @@ class Docs extends Component {
               anchor: 'day-offsethours',
             },
             {
+              label: 'Day - Retrograde Display',
+              anchor: 'day-retrogradedisplay',
+            },
+            {
               label: 'Month - Overview',
               anchor: 'month-overview',
             },
             {
               label: 'Month - Define the Indicator',
               anchor: 'month-definetheindicator',
+            },
+            {
+              label: 'Month - Retrograde Display',
+              anchor: 'month-retrogradedisplay',
             },
             {
               label: 'Year - Overview',
@@ -534,6 +542,24 @@ let demo = new Watch(settings);`}
               </CodeBlock>
             </DocSection>
 
+            <DocSection subHeader='Day - Retrograde Display' anchor='day-retrogradedisplay'>
+              <DocSpecs property='retrograde' />
+              <p>Retrograde displays are slightly common as a way to tell the date without the use of a full, circular disc. A retrograde display consists of a hand that rotates along a partial circle and upon reaching the end it jumps back to its original position.</p>
+              <p>The <span className='is-code-ref'>retrograde</span> object supports one property, <span className='is-code-ref'>max</span>, which is a number. TickTock expects the indicator to be drawn at its starting position which will be treated as 0 degrees. The <span className='is-code-ref'>max</span> value defines how far the hand must rotate before reaching its end. The <span className='is-code-ref'>max</span> value will be divided by 7 and the indiator will be rotated according to that value per the day.</p>
+              <p>The <span className='is-code-ref'>max</span> property can be considered optional. If no value is assigned, TickTock will default to <span className='is-code-ref'>180</span>. Given this, the <span className='is-code-ref'>retrograde</span> property could be given a <span className='is-code-ref'>true</span> boolean value instead of an object.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  day: {
+    id: 'day-arrow',
+    retrograde: {
+      max: 210
+    }
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
             <DocSection subHeader='Month - Overview' anchor='month-overview'>
               <DocSpecs property='month' />
               <p>Month indicators are used to display the current month of the year. This is commonly seen as a rotating dial with the month abbreviation being shown through a window but can also be built as a rotating hand pointing to the current month.</p>
@@ -555,6 +581,24 @@ let demo = new Watch(settings);`}
   ...
   month: {
     id: 'month-disc'
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Month - Retrograde Display' anchor='month-retrogradedisplay'>
+              <DocSpecs property='retrograde' />
+              <p>Retrograde displays are slightly common as a way to tell the date without the use of a full, circular disc. A retrograde display consists of a hand that rotates along a partial circle and upon reaching the end it jumps back to its original position.</p>
+              <p>The <span className='is-code-ref'>retrograde</span> object supports one property, <span className='is-code-ref'>max</span>, which is a number. TickTock expects the indicator to be drawn at its starting position which will be treated as 0 degrees. The <span className='is-code-ref'>max</span> value defines how far the hand must rotate before reaching its end. The <span className='is-code-ref'>max</span> value will be divided by 12 and the indiator will be rotated according to that value per the month.</p>
+              <p>The <span className='is-code-ref'>max</span> property can be considered optional. If no value is assigned, TickTock will default to <span className='is-code-ref'>180</span>. Given this, the <span className='is-code-ref'>retrograde</span> property could be given a <span className='is-code-ref'>true</span> boolean value instead of an object.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  month: {
+    id: 'month-arrow',
+    retrograde: {
+      max: 210
+    }
   }
 };`}
               </CodeBlock>
