@@ -676,6 +676,7 @@ let demo = new Watch(settings);`}
       tenth: 'chrono-tenth-second-hand',
       second: 'chrono-second-hand',
       minute: 'chrono-minute-hand',
+      hour: 'chrono-hour-hand',
     },
   },
 };`}
@@ -684,7 +685,7 @@ let demo = new Watch(settings);`}
 
             <DocSection subHeader='Define the Hands' anchor='chronograph-definethehands'>
               <DocSpecs property='hands' required='True' />
-              <p>The <span className='is-code-ref'>chronograph</span> object expects a <span className='is-code-ref'>hands</span> object to create references based on element IDs. TickTock supports hands for tenth seconds, seconds, and minutes. Each property should be a string containing the individual hand element ID.</p>
+              <p>The <span className='is-code-ref'>chronograph</span> object expects a <span className='is-code-ref'>hands</span> object to create references based on element IDs. ickTock supports hands for tenth seconds, seconds, minutes and hours. Each property should be a string containing the individual hand element ID. TickTock expects at a minimum a second and minute hand.</p>
               <CodeBlock>
 {`settings = {
   ...
@@ -693,6 +694,7 @@ let demo = new Watch(settings);`}
       tenth: 'chrono-tenth-second-hand',
       second: 'chrono-second-hand',
       minute: 'chrono-minute-hand',
+      hour: 'chrono-hour-hand',
     },
   },
 };`}
