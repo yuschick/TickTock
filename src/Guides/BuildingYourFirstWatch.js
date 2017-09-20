@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CodeBlock from './../components/CodeBlock/CodeBlock';
 import SVGWatch from './../components/SVGWatch/SVGWatch';
 import HeaderImage from './../images/guides/firstwatch/header.jpg'
+import DemoSVG from './../images/guides/firstwatch/first-watch-optimised.svg';
 
 class BuildingYourFirstWatch extends Component {
   render() {
@@ -16,7 +17,7 @@ class BuildingYourFirstWatch extends Component {
           The SVG has been created already and the optimized code can be downloaded below. This is all we need to get started.
         </p>
         <p>
-          <a href='./src/images/guides/firstwatch/first-watch-optimised.svg' className='btn primary'>Download Optimized SVG Code</a>
+          <a href={DemoSVG} className='btn primary'>Download Optimized SVG Code</a>
         </p>
         <p className='is-strong'>
           index.html
