@@ -139,7 +139,7 @@ class BuildingYourFirstWatch extends Component {
       minute: 'secondary-minute-hand',
       second: 'secondary-second-hand'
     },
-    offset: '+4',
+    timezone: 'America/New_York',
     sweep: true
   }]
 };`}
@@ -190,7 +190,7 @@ class BuildingYourFirstWatch extends Component {
         minute: 'secondary-minute-hand',
         second: 'secondary-second-hand'
       },
-      offset: '+4',
+      timezone: 'America/New_York',
       sweep: true
       }
     ],

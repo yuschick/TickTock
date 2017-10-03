@@ -144,7 +144,7 @@ class SVGWatch extends Component {
                 hour: 'crown-secondary-hour-hand',
                 minute: 'crown-secondary-minute-hand',
               },
-              offset: '+6',
+              timezone: 'America/New_York',
             },
           ],
           crown: {
@@ -219,7 +219,7 @@ class SVGWatch extends Component {
               minute: 'secondary-minute-hand',
               second: 'secondary-second-hand',
             },
-            offset: '+4',
+            timezone: 'America/New_York',
             sweep: true,
           },
           ],
