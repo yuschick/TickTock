@@ -315,6 +315,29 @@
 .bottom-center {
   transform-origin: 125px 179px; }
 
+.jumping-second-st0 {
+  fill: #FFFFFF; }
+
+.jumping-second-st1 {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 5;
+  stroke-miterlimit: 10; }
+
+.jumping-second-st2 {
+  fill: #EFF1F3; }
+
+.jumping-second-st3 {
+  fill: #272727; }
+
+.jumping-second-st4 {
+  fill: none;
+  stroke: #272727;
+  stroke-miterlimit: 10; }
+
+.jumping-second-st5 {
+  fill: #007486; }
+
 #start-pause-btn {
   transform: translate(0, 0);
   transition: transform 0.05s ease; }

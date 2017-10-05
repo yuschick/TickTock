@@ -60,6 +60,7 @@ class Home extends Component {
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='perpetual-calendar' demo='perpetual-calendar-demo' active={this.state.activeDemo === 'perpetual-calendar'} docs='calendars-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='chronograph' demo='chronograph-demo' active={this.state.activeDemo === 'chronograph'} docs='chronograph-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='day-night-indicator' demo='day-night-indicator-demo' active={this.state.activeDemo === 'day-night-indicator'} docs='day-night-overview'  />
+              <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='foudroyante' demo='foudroyante-demo' active={this.state.activeDemo === 'foudroyante'} docs='foudroyante-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='manual-time' demo='manual-time-demo' active={this.state.activeDemo === 'manual-time'} docs='crown-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='minute-repeater' demo='minute-repeater-demo' active={this.state.activeDemo === 'minute-repeater'} docs='minute-repeater-overview'  />
               <ComplicationContainer toggle={this.toggleCodeBlock} showCode={this.state.showCode} id='moonphase' demo='moonphase-demo' active={this.state.activeDemo === 'moonphase'} docs='moonphase-overview'  />
@@ -78,7 +79,7 @@ class Home extends Component {
               like {String.fromCharCode(39)}center{String.fromCharCode(39)} and {String.fromCharCode(39)}bottom{String.fromCharCode(39)}.
             </p>
             <p>
-              Understandably, this is a very niche library but I found myself wanting to re-use many of these components so why not open it up for others. I welcome contributions from others who also admire watchmaking. Take a look at the <a href='https://github.com/yuschick/TickTock/tree/master'>README on Github</a>        to find functionality already on the ToDo list or feel free to send a PR for complications or updates to things I have missed.
+              Understandably, this is a very niche library but I found myself wanting to re-use many of these components so why not open it up for others. I welcome contributions from others who also admire watchmaking. Take a look at the <a href='https://github.com/yuschick/TickTock/issues'>open issues on Github</a> to find functionality already on the ToDo list or feel free to send a PR for complications or updates to things I have missed.
             </p>
           </section>
         </div>

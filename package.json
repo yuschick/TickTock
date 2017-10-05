@@ -23,7 +23,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "ticktock-js": "^2.7.0"
+    "ticktock-js": "^2.10.0"
   },
   "lint-staged": {
     "*.js": [

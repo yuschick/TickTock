@@ -19,6 +19,9 @@ class SecondaryNav extends Component {
           <li className={this.props.active === 'day-night-indicator' ? 'active' : ''} onClick={() => {this.props.update('day-night-indicator')}}>
             <span>Day/Night Indicator</span>
           </li>
+          <li className={this.props.active === 'foudroyante' ? 'active' : ''} onClick={() => {this.props.update('foudroyante')}}>
+            <span>Foudroyante</span>
+          </li>
           <li className={this.props.active === 'manual-time' ? 'active' : ''} onClick={() => {this.props.update('manual-time')}}>
             <span>Manual Time</span>
           </li>

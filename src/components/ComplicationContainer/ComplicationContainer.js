@@ -161,6 +161,32 @@ let demo = new Watch(settings);
 let demo = new Watch(settings);
 `;
       break;
+
+      case 'foudroyante':
+        desc = [
+          {
+            key: 'foudroyante-01',
+            text: 'A foudroyante is also called a jumping seconds hand. What it mostly does is move very quickly on a watch dial in steps (not sweeping). Depending on the speed of the movement, the foudroyante hand makes a few very brief stops as it makes a full revolution each second. For example a hand may make six stops each second, and runs continuously as opposed to being part of a chronograph.',
+          }
+        ];
+        code = `let settings = {
+  dials: [{
+    hands: {
+      hour: 'foudroyante-hour-hand',
+      minute: 'foudroyante-minute-hand',
+      second: 'foudroyante-second-hand'
+    }
+  }],
+  foudroyante: {
+    id: 'jumping-second-hand',
+    steps: 6
+  }
+};
+
+let demo = new Watch(settings);
+`;
+      break;
+
       case 'manual-time':
         desc = [
           {

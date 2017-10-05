@@ -110,6 +110,10 @@ class Docs extends Component {
               anchor: 'chronograph-flyback',
             },
             {
+              label: 'Rattrapante Chronograph',
+              anchor: 'chronograph-rattrapante',
+            },
+            {
               label: 'Button Active States',
               anchor: 'chronograph-activestates',
             },
@@ -178,6 +182,24 @@ class Docs extends Component {
               anchor: 'dials-multipledials',
             },
           ],
+        },
+        {
+          header: 'Foudroyante (Jumping Seconds)',
+          active: false,
+          items: [
+            {
+              label: 'Overview',
+              anchor: 'foudroyante-overview'
+            },
+            {
+              label: 'Define the Element',
+              anchor: 'foudroyante-definetheelement'
+            },
+            {
+              label: 'Set the Amount of Steps',
+              anchor: 'foudroyante-steps'
+            }
+          ]
         },
         {
           header: 'Manual Time (Crown)',
@@ -319,6 +341,7 @@ class Docs extends Component {
     const repeaterSection = this.repeaterSection;
     const moonphaseSection = this.moonphaseSection;
     const reserveSection = this.reserveSection;
+    const foudroyanteSection = this.foudroyanteSection;
 
     if (pos >= 57) {
       this.setState({fixed: true});
@@ -336,7 +359,9 @@ class Docs extends Component {
       this.toggleDocTreeGroups('day-night-indicator');
     } else if (pos > indicatorSection.offsetTop + indicatorSection.clientHeight && pos < dialsSection.offsetTop + dialsSection.clientHeight) {
       this.toggleDocTreeGroups('dials');
-    } else if (pos > dialsSection.offsetTop + dialsSection.clientHeight && pos < crownSection.offsetTop + crownSection.clientHeight) {
+    } else if (pos > dialsSection.offsetTop + dialsSection.clientHeight && pos < foudroyanteSection.offsetTop + foudroyanteSection.clientHeight) {
+      this.toggleDocTreeGroups('foudroyante-(jumping seconds)');
+    } else if (pos > foudroyanteSection.offsetTop + foudroyanteSection.clientHeight && pos < crownSection.offsetTop + crownSection.clientHeight) {
       this.toggleDocTreeGroups('manual-time (crown)');
     } else if (pos > crownSection.offsetTop + crownSection.clientHeight && pos < repeaterSection.offsetTop + repeaterSection.clientHeight) {
       this.toggleDocTreeGroups('minute-repeater');
@@ -407,7 +432,7 @@ class Docs extends Component {
       minute: 'secondary-minute-hand',
       second: 'secondary-second-hand'
     },
-    offset: '+4',
+    timezone: 'America/New_York',
     sweep: true
   }],
   reserve: {
@@ -529,7 +554,7 @@ let demo = new Watch(settings);`}
             </DocSection>
 
             <DocSection subHeader='Day - Offset the Hours' anchor='day-offsethours'>
-              <DocSpecs property='offset' type='Boolean' def='False' />
+              <DocSpecs property='offsetHours' type='Boolean' def='False' />
               <p>While most indicators rotate once a day to depict the current label, some update regularly with the time to also indicate the progression through the day. Using the <span className='is-code-ref'>offsetHours</span> setting allows TickTock to not only rotate the element to the correct day but to also rotate an additional amount for the day{String.fromCharCode(39)}s current hour.</p>
               <CodeBlock>
   {`let settings = {
@@ -634,7 +659,7 @@ let demo = new Watch(settings);`}
             </DocSection>
 
             <DocSection subHeader='Year - Offset the Months' anchor='year-offsetmonths'>
-              <DocSpecs property='offset' type='Boolean' def='False' />
+              <DocSpecs property='offsetMonths' type='Boolean' def='False' />
               <p>TickTock also accounts for designs that may want to show the year{String.fromCharCode(39)}s progress. Much like the Day Indicator{String.fromCharCode(39)}s offsetHours functionality, the offsetMonths functionality rotates the indicator 90deg for each year and an additional 7.5deg for each month.</p>
               <p>TickTock expects the initial position of the indicator pointing toward the first year in the set of four with the fourth year being the leap year. If the indicator is not going to offset the months, the indictor can point to the middle of the year and will rotate 90deg for each additional year. But if the indicator is to offset the months, the initial position should begin at the very beginning of the first year label as it will rotate 90deg per year and an additional 7.5deg per month.</p>
               <CodeBlock>
@@ -695,6 +720,7 @@ let demo = new Watch(settings);`}
       second: 'chrono-second-hand',
       minute: 'chrono-minute-hand',
       hour: 'chrono-hour-hand',
+      step: 'chrono-step-hand'
     },
   },
 };`}
@@ -731,6 +757,26 @@ let demo = new Watch(settings);`}
   chronograph: {
     ...
     flyback: true,
+  },
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Rattrapante Chronograph' anchor='chronograph-rattrapante'>
+              <DocSpecs property='rattrapante' type='Boolean' required='False' def='False' />
+              <p>A Rattrapante is a variation of a chronograph that supports an additional seconds hand. WHen running, both seconds hands rotate around the dial simultaneously until the secondary pusher is pressed. This action will pause the superimposed second hand in place while the other continues running. Pressing the pusher again will reset the superimposed hand so both hands run in unison again. This functionality is another method for timing repeated functions, such as lap times.</p>
+              <p>Setting the <span className="is-code-ref">rattrapante</span> to <span className="is-code-ref">true</span> will also require the inclusion of a <span className="is-code-ref">step</span> hand property being passed into the <span className="is-code-ref">chronograph.hands</span> object. The <span className="is-code-ref">step</span> hand will function as the superimposed second hand and alternate running in unison or breaking on laps.</p>
+              <p>While many rattrapante chronographs function with three pushers, currently TickTock only supports the existing dual pusher model. Currently, the <span className="is-code-ref">start</span> button will toggle running the chronograph while the <span className="is-code-ref">reset</span> button will toggle the break of the <span className="is-code-ref">step</span> hand.</p>
+              <CodeBlock>
+{`settings = {
+  ...
+  chronograph: {
+    ...
+    hands: {
+      ...
+      step: 'step-second-hand'
+    },
+    rattrapante: true,
   },
 };`}
               </CodeBlock>
@@ -793,7 +839,7 @@ let demo = new Watch(settings);`}
         minute: 'dial-secondary-minute-hand',
         second: 'dial-secondary-second-hand'
       },
-      offset: '+6',
+      timezone: 'America/New_York',
       sweep: true
     }]
   dayNightIndicator: {
@@ -833,7 +879,7 @@ let demo = new Watch(settings);`}
       minute: 'element-id',
       second: 'element-id'
     },
-    offset: '+3',
+    timezone: 'America/New_York',
     format: 12,
     sweep: true
   }]
@@ -854,7 +900,7 @@ let demo = new Watch(settings);`}
       minute: 'element-id',
       second: 'element-id'
     },
-    offset: '+3',
+    timezone: 'America/New_York',
     format: 12,
     sweep: true
   }]
@@ -934,7 +980,7 @@ let demo = new Watch(settings);`}
             </DocSection>
 
             <DocSection subHeader='12/24-hour Formats' anchor='dials-hourformats'>
-              <DocSpecs property='offset' type='Number' def='12' />
+              <DocSpecs property='format' type='Number' def='12' />
               <p>Most watches show time in a 12-hour format where the hour hand rotates a full circle every 12 hours. But if the dial is to show the time in a 24-hour format, TickTock supports the <span className='is-code-ref'>format</span> property. The property defaults to 12 but can be set to 24 to adust the rotation value of the hour hand.</p>
               <CodeBlock>
   {`let settings = {
@@ -946,7 +992,7 @@ let demo = new Watch(settings);`}
       second: 'element-id'
     }
   }],
-  offset: '-4',
+  timezone: 'America/New_York',
   format: 24
 };`}
               </CodeBlock>
@@ -966,7 +1012,7 @@ let demo = new Watch(settings);`}
       second: 'element-id'
     }
   }],
-  offset: '-4',
+  timezone: 'America/New_York',
   format: 24,
   sweep: true
 };`}
@@ -992,9 +1038,54 @@ let demo = new Watch(settings);`}
         minute: 'dial-secondary-minute-hand',
         second: 'dial-secondary-second-hand'
       },
-      offset: '+6',
+      timezone: 'America/New_York',
       sweep: true
     }]
+};`}
+              </CodeBlock>
+            </DocSection>
+          </section>
+
+          <section ref={section => this.foudroyanteSection = section}>
+            <DocSection groupHeader='Foudroyante (Jumping Seconds)' subHeader='Overview' anchor='foudroyante-overview'>
+              <DocSpecs property='foudroyante' type='Object' />
+              <p>A foudroyante is also called a jumping seconds hand. What it mostly does is move very quickly on a watch dial in steps (not sweeping). Depending on the speed of the movement, the foudroyante hand makes a few very brief stops as it makes a full revolution each second. For example a hand may make six stops each second, and runs continuously as opposed to being part of a chronograph.</p>
+              <p>Based upon the amount in the <span className='is-code-ref'>steps</span> property, the target element (defined by id) will jump <span className='is-code-ref'>[steps]</span> amount of times around its dial per second. For example, if <span className='is-code-ref'>steps</span> is set to <span className='is-code-ref'>6</span>, the hand will jump <span className='is-code-ref'>60 (360 / 6)</span> degrees every 1/6 of a second.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  foudroyante: {
+    id: 'foudroyante-hand',
+    steps: 6
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Define the Element' anchor='foudroyante-definetheelement'>
+              <DocSpecs property='id' type='String' required="True" />
+              <p>The <span className='is-code-ref'>foudroyante</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the foudroyante hand's element{String.fromCharCode(39)}s ID. TickTock expects the hand to be designed in its beginning position, typically 12 o' clock.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  foudroyante: {
+    id: 'foudroyante-hand'
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Set the Amount of Steps' anchor='foudroyante-steps'>
+              <DocSpecs property='steps' type='Number' required="True" />
+              <p>The <span className="is-code-ref">steps</span> value determines how many times the foudroyante hand should jump each second as it rotates around its dial. For example, if <span className='is-code-ref'>steps</span> is set to <span className='is-code-ref'>6</span>, the hand will jump <span className='is-code-ref'>60 (360 / 6)</span> degrees every 1/6 of a second.</p>
+              <p>The <span className="is-code-ref">steps</span> property only accepts values between 2-10.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  foudroyante: {
+    id: 'foudroyante-hand',
+    steps: 6
+  }
 };`}
               </CodeBlock>
             </DocSection>

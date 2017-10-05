@@ -6503,9 +6503,9 @@ through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-ticktock-js@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/ticktock-js/-/ticktock-js-2.7.0.tgz#334ea38ec47ff9b811d88fe66459e1dfa71cdf27"
+ticktock-js@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/ticktock-js/-/ticktock-js-2.10.0.tgz#812125e6e209898249cf9fc16e4bbb3b63af0205"
   dependencies:
     json-loader "^0.5.7"
     moment "^2.18.1"

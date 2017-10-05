@@ -128,6 +128,24 @@ class SVGWatch extends Component {
         };
 
         break;
+
+        case 'foudroyante':
+          settings = {
+    dials: [{
+      hands: {
+        hour: 'foudroyante-hour-hand',
+        minute: 'foudroyante-minute-hand',
+        second: 'foudroyante-second-hand'
+      }
+    }],
+    foudroyante: {
+      id: 'jumping-second-hand',
+      steps: 6
+    }
+  };
+
+          break;
+
       case 'manual-time':
         settings = {
           dials: [{
@@ -260,6 +278,33 @@ class SVGWatch extends Component {
         </g>
         <rect className='primary-center st2' id="minute-hand" x="123" y="15.2" width="4" height="110"/>
         <rect className='primary-center' id="hour-hand" x="121.5" y="46.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 250 171.5)" width="7" height="79"/>
+      </svg>
+    );
+  }
+
+  getFoudroyanteWatch() {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0" y="0" viewBox="0 0 250 250" xmlSpace="preserve">
+        <path className="jumping-second-st0" d="M125 245C58.8 245 5 191.2 5 125S58.8 5 125 5s120 53.8 120 120S191.2 245 125 245z"/>
+        <path d="M125 10c30.7 0 59.6 12 81.3 33.7S240 94.3 240 125s-12 59.6-33.7 81.3S155.7 240 125 240s-59.6-12-81.3-33.7S10 155.7 10 125s12-59.6 33.7-81.3S94.3 10 125 10M125 0C56 0 0 56 0 125s56 125 125 125 125-56 125-125S194 0 125 0L125 0z"/>
+        <line className="jumping-second-st1" x1="125.3" y1="0.2" x2="125.3" y2="29.2"/>
+        <line className="jumping-second-st1" x1="125.3" y1="220.8" x2="125.3" y2="249.8"/>
+        <line className="jumping-second-st1" x1="187.7" y1="17" x2="173.2" y2="42.1"/>
+        <line className="jumping-second-st1" x1="77.4" y1="207.9" x2="62.9" y2="233"/>
+        <line className="jumping-second-st1" x1="233.4" y1="62.6" x2="208.2" y2="77.1"/>
+        <line className="jumping-second-st1" x1="42.4" y1="172.9" x2="17.3" y2="187.4"/>
+        <line className="jumping-second-st1" x1="250.1" y1="125" x2="221.1" y2="125"/>
+        <line className="jumping-second-st1" x1="29.6" y1="125" x2="0.6" y2="125"/>
+        <line className="jumping-second-st1" x1="233.4" y1="187.4" x2="208.2" y2="172.9"/>
+        <line className="jumping-second-st1" x1="42.4" y1="77.1" x2="17.3" y2="62.6"/>
+        <line className="jumping-second-st1" x1="187.7" y1="233" x2="173.2" y2="207.9"/>
+        <line className="jumping-second-st1" x1="77.4" y1="42.1" x2="62.9" y2="17"/>
+        <path className="jumping-second-st2" d="M125.3 210.8c-17.1 0-31-13.9-31-31s13.9-31 31-31 31 13.9 31 31S142.4 210.8 125.3 210.8z"/>
+        <path className="jumping-second-st3" d="M125.3 149.2c16.8 0 30.5 13.7 30.5 30.5s-13.7 30.5-30.5 30.5 -30.5-13.7-30.5-30.5S108.5 149.2 125.3 149.2M125.3 148.2c-17.4 0-31.5 14.1-31.5 31.5s14.1 31.5 31.5 31.5 31.5-14.1 31.5-31.5S142.7 148.2 125.3 148.2L125.3 148.2z"/>
+        <line id="jumping-second-hand" className="jumping-second-st4 secondary-center" x1="125.3" y1="179.8" x2="125.3" y2="148.8"/>
+        <rect className='primary-center st7' id="foudroyante-second-hand" x="123.3" y="15.2" width="2" height="110"/>
+        <rect className='primary-center st8' id="foudroyante-minute-hand" x="123.3" y="15.2" width="4" height="110"/>
+        <rect className='primary-center' id="foudroyante-hour-hand" x="121.8" y="46.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 250.6448 171.5)" width="7" height="79"/>
       </svg>
     );
   }
@@ -748,6 +793,9 @@ class SVGWatch extends Component {
         break;
       case 'day-night-indicator':
         watch = this.getDayNightDemo();
+        break;
+      case 'foudroyante':
+        watch = this.getFoudroyanteWatch();
         break;
       case 'manual-time':
         watch = this.getCrownDemo();
