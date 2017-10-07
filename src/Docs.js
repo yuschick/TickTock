@@ -162,6 +162,10 @@ class Docs extends Component {
               anchor: 'dials-definethehands',
             },
             {
+              label: 'Retrograde Displays',
+              anchor: 'dials-retrogradedisplays',
+            },
+            {
               label: 'GMT Offsets',
               anchor: 'dials-gmtoffsets',
             },
@@ -177,6 +181,7 @@ class Docs extends Component {
               label: 'Sweeping Seconds',
               anchor: 'dials-sweepingseconds',
             },
+
             {
               label: 'Multiple Dials',
               anchor: 'dials-multipledials',
@@ -933,6 +938,33 @@ let demo = new Watch(settings);`}
       hour: 'element-id',
       minute: 'element-id',
       second: 'element-id'
+    }
+  }]
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Retrograde Displays' anchor='dials-retrogradedisplays'>
+              <DocSpecs property='retrograde' type='Object' def='null' />
+              <p>The <span className='is-code-ref'>retrograde</span> property currently only supports second hand displays.</p>
+              <p>Retrograde displays show the time in intervals. Instead of rotating a full 360 degrees around the dial, the retrograde hand will rotate around a partial circle depicting X amount of time with each passing. Upon reaching the end of its partial circle, the hand is reset to its beginning position and continues. For example, a retrograde display could show 30 second intervals, meaning the hand will traverse the partial circle once every 30 seconds or twice per minute.</p>
+              <p>The <span className='is-code-ref'>second</span> property, which is an object, requires the <span className='is-code-ref'>id</span> and <span className='is-code-ref'>max</span> properties. The <span className='is-code-ref'>id</span> property expects a string of the second hand element's ID while the <span className='is-code-ref'>max</span> expects a number defining the maximum rotational value of the retrograde display. TickTock expects the hand to be initially set at the beginning, or 0 value, of the display.</p>
+              <p>By default, TickTock will assume that the retrograde second hand will take 60 seconds to rotate to its <span className='is-code-ref'>max</span> angle value. However, an optional property, <span className='is-code-ref'>duration</span>, can provide a number to override that functionality. If the retrograde display is to only show 30 seconda at a time, the <span className='is-code-ref'>duration</span> value can be set to 30 at which point the second hand will move across its display twice every minute.</p>
+              <p>The <span className='is-code-ref'>duration</span> value is required to be at least 5 seconds an evenly divisible by 60.</p>
+              <CodeBlock>
+  {`let settings = {
+  dials: [{
+    name: 'primary-dial',
+    hands: {
+      hour: 'element-id',
+      minute: 'element-id',
+    },
+    retrograde: {
+      second: {
+        id: 'retrograde-second-hand',
+        max: 180,
+        duration: 30
+      }
     }
   }]
 };`}
