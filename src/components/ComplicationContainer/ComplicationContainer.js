@@ -228,7 +228,7 @@ let demo = new Watch(settings);
         desc = [
           {
             key: 'repeater-01',
-            text: 'A repeater is a complication that audibly chimes the hours and often minutes at the press of a button. There are many types of repeater but the minute repeater chimes the time down to the minute, using separate tones for hours, quarter hours, and minutes.',
+            text: 'A repeater is a complication that audibly chimes the hours and often minutes at the press of a button. There are many types of repeater but the minute repeater chimes the time down to the minute, using separate tones for hours and minutes and playing both to represent quarter hours.',
           },
           {
             key: 'repeater-02',
@@ -247,8 +247,7 @@ let demo = new Watch(settings);
     id: 'play-repeater',
     chimes: {
       hour: './sounds/chime-01.mp4',
-      quarter: './sounds/chime-02.mp4',
-      minute: './sounds/chime-03.mp4'
+      minute: './sounds/chime-02.mp4'
     }
   }
 };

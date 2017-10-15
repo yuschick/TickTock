@@ -1171,7 +1171,8 @@ let demo = new Watch(settings);`}
           <section ref={section => this.repeaterSection = section}>
             <DocSection groupHeader='Minute Repeater' subHeader='Overview' anchor='minute-repeater-overview'>
               <DocSpecs property='repeater' type='Object' />
-              <p>A repeater is a complication that audibly chimes the hours and often minutes at the press of a button. There are many types of repeater but the minute repeater chimes the time down to the minute, using separate tones for hours, quarter hours, and minutes.</p>
+              <p className='is-strong'>While TickTock supports a third <span className='is-code-ref'>chimes</span> property, <span className="is-code-ref">quarter</span> this property will be deprecated in v3.0.</p>
+              <p>A repeater is a complication that audibly chimes the hours and often minutes at the press of a button. There are many types of repeater but the minute repeater chimes the time down to the minute, using separate tones for hours and minutes while playing both to represent quarter hours.</p>
               <p>The repeater button or trigger can be any element type as long as it contains an ID. Clicking the trigger will toggle playing the chimes. Upon playing the chimes, the time is stored so in the event a new minute passes after the initial button was clicked but before the chimes have completed, the latest minute will not be played.</p>
               <CodeBlock>
   {`let settings = {
@@ -1180,7 +1181,6 @@ let demo = new Watch(settings);`}
     id: 'repeater-btn',
     chimes: {
       hour: './dist/sounds/chime-01.mp4',
-      quarter: './dist/sounds/chime-02.mp4',
       minute: './dist/sounds/chime-03.mp4'
     },
     dial: 1
@@ -1205,7 +1205,8 @@ let demo = new Watch(settings);`}
 
             <DocSection subHeader='Define the Chimes' anchor='minute-repeater-definethechimes'>
               <DocSpecs property='chimes' type='Object' required='True' />
-              <p>There are chimes included with TickTock, three separate sounds to represent minutes, quarter hours, and hours. These sounds were found on the <a href='https://freesound.org/' target='new' className='invert'>Free Sound Project</a>.</p>
+              <p className='is-strong'>While TickTock supports a third <span className='is-code-ref'>chimes</span> property, <span className="is-code-ref">quarter</span> this property will be deprecated in v3.0.</p>
+              <p>There are chimes included with TickTock, three separate sounds that can be used to represent minutes, quarter hours, and hours. These sounds were found on the <a href='https://freesound.org/' target='new' className='invert'>Free Sound Project</a>.</p>
               <p>However, custom chimes can be used by defining the path to each audio file inside of the <span className='is-code-ref'>chimes</span> object.</p>
               <CodeBlock>
   {`let settings = {
@@ -1214,8 +1215,7 @@ let demo = new Watch(settings);`}
     id: 'repeater-btn',
     chimes: {
       hour: './dist/sounds/chime-01.mp4',
-      quarter: './dist/sounds/chime-02.mp4',
-      minute: './dist/sounds/chime-03.mp4'
+      minute: './dist/sounds/chime-02.mp4'
     }
   }
 };`}
@@ -1232,7 +1232,6 @@ let demo = new Watch(settings);`}
     id: 'repeater-btn',
     chimes: {
       hour: './dist/sounds/chime-01.mp4',
-      quarter: './dist/sounds/chime-02.mp4',
       minute: './dist/sounds/chime-03.mp4'
     },
     dial: 1
