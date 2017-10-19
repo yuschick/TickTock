@@ -78,8 +78,8 @@ class SVGWatch extends Component {
             ],
             chronograph: {
               buttons: {
-                start: 'start-pause-btn',
-                reset: 'reset-btn',
+                primary: 'chrono-primary-btn',
+                secondary: 'chrono-secondary-btn',
               },
               hands: {
                 tenth: 'chrono-tenth-second-hand',
@@ -340,8 +340,8 @@ class SVGWatch extends Component {
   getChronographDemo() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 250 250" xmlSpace="preserve">
-        <path id="reset-btn" className="chrono-st0" d="M168.8 206.5l43.2 24.9c5.7 3.3 13.1 1.3 16.4-4.4l10.5-18.2c3.3-5.7 1.3-13.1-4.4-16.4l-43.2-24.9c-5.7-3.3-13.1-1.3-16.4 4.4l-10.5 18.2C161.1 195.8 163.1 203.2 168.8 206.5z"/>
-        <path id="start-pause-btn" className="chrono-st0" d="M234.5 57.6l-43.2 24.9c-5.7 3.3-13.1 1.3-16.4-4.4l-10.5-18.2c-3.3-5.7-1.3-13.1 4.4-16.4L212 18.6c5.7-3.3 13.1-1.3 16.4 4.4l10.5 18.2C242.2 46.9 240.2 54.3 234.5 57.6z"/>
+        <path id="chrono-secondary-btn" className="chrono-st0" d="M168.8 206.5l43.2 24.9c5.7 3.3 13.1 1.3 16.4-4.4l10.5-18.2c3.3-5.7 1.3-13.1-4.4-16.4l-43.2-24.9c-5.7-3.3-13.1-1.3-16.4 4.4l-10.5 18.2C161.1 195.8 163.1 203.2 168.8 206.5z"/>
+        <path id="chrono-primary-btn" className="chrono-st0" d="M234.5 57.6l-43.2 24.9c-5.7 3.3-13.1 1.3-16.4-4.4l-10.5-18.2c-3.3-5.7-1.3-13.1 4.4-16.4L212 18.6c5.7-3.3 13.1-1.3 16.4 4.4l10.5 18.2C242.2 46.9 240.2 54.3 234.5 57.6z"/>
         <path className="chrono-st1" d="M125 245C58.8 245 5 191.2 5 125S58.8 5 125 5s120 53.8 120 120S191.2 245 125 245z"/>
         <path d="M125 10c30.7 0 59.6 12 81.3 33.7S240 94.3 240 125s-12 59.6-33.7 81.3S155.7 240 125 240s-59.6-12-81.3-33.7S10 155.7 10 125s12-59.6 33.7-81.3S94.3 10 125 10M125 0C56 0 0 56 0 125s56 125 125 125 125-56 125-125S194 0 125 0L125 0z"/>
         <line className="chrono-st2" x1="125.3" y1="0.2" x2="125.3" y2="29.2"/>

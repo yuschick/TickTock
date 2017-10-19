@@ -76,6 +76,22 @@ class Docs extends Component {
               anchor: 'month-retrogradedisplay',
             },
             {
+              label: 'Week - Overview',
+              anchor: 'week-overview',
+            },
+            {
+              label: 'Week - Define the Indicator',
+              anchor: 'week-definetheindicator',
+            },
+            {
+              label: 'Week - ISO Time',
+              anchor: 'week-isotime',
+            },
+            {
+              label: 'Week - Invert the Direction',
+              anchor: 'week-invertthedirection',
+            },
+            {
               label: 'Year - Overview',
               anchor: 'year-overview',
             },
@@ -87,6 +103,10 @@ class Docs extends Component {
               label: 'Year - Offset Months',
               anchor: 'year-offsetmonths',
             },
+            {
+              label: 'Invert Component Direction',
+              anchor: 'calendar-invertthedirection',
+            }
           ],
         },
         {
@@ -166,10 +186,6 @@ class Docs extends Component {
               anchor: 'dials-retrogradedisplays',
             },
             {
-              label: 'GMT Offsets',
-              anchor: 'dials-gmtoffsets',
-            },
-            {
               label: 'Defining a Timezone',
               anchor: 'dials-timezone',
             },
@@ -189,20 +205,20 @@ class Docs extends Component {
           ],
         },
         {
-          header: 'Foudroyante (Jumping Seconds)',
+          header: 'Foudroyante',
           active: false,
           items: [
             {
               label: 'Overview',
-              anchor: 'foudroyante-overview'
+              anchor: 'foudroyante-overview',
             },
             {
               label: 'Define the Element',
-              anchor: 'foudroyante-definetheelement'
+              anchor: 'foudroyante-definetheelement',
             },
             {
               label: 'Set the Amount of Steps',
-              anchor: 'foudroyante-steps'
+              anchor: 'foudroyante-steps',
             }
           ]
         },
@@ -592,7 +608,7 @@ let demo = new Watch(settings);`}
 
             <DocSection subHeader='Month - Overview' anchor='month-overview'>
               <DocSpecs property='month' />
-              <p>Month indicators are used to display the current month of the year. This is commonly seen as a rotating dial with the month abbreviation being shown through a window but can also be built as a rotating hand pointing to the current month.</p>
+              <p>Month indicators are used to display the current month of the year. This is commonly seen as a rotating dial with the month abbreviation being shown through a window but can also be built as a rotating or retrograde hand pointing to the current month.</p>
               <CodeBlock>
   {`let settings = {
   ...
@@ -634,6 +650,47 @@ let demo = new Watch(settings);`}
               </CodeBlock>
             </DocSection>
 
+            <DocSection subHeader='Week - Overview' anchor='week-overview'>
+              <DocSpecs property='week' />
+              <p>Less commonly seen, a week indicator is used to display the current week number of the year. This value is collected from MomentJS and follows its process for retrieving the locale-determined week number. Additional docmentation can be found <a href="https://momentjs.com/docs/#/get-set/week/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+              <CodeBlock>
+                {`let settings = {
+  ...
+  week: {
+    id: 'week-disc',
+    iso: true
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Week - Define the Indicator' anchor='week-definetheindicator'>
+              <DocSpecs property='id' type='String' required='True' />
+              <p>The <span className='is-code-ref'>week</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the indicator element{String.fromCharCode(39)}s ID. TickTock, by default, expects the indicator to be initially set on Week 1.</p>
+              <CodeBlock>
+                {`let settings = {
+  ...
+  week: {
+    id: 'week-disc'
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Week - ISO Time' anchor='week-isotime'>
+              <DocSpecs property='iso' type='Boolean' required='False' def="False" />
+              <p>The ISO week date system is effectively a leap week calendar system that is part of the date and time standard issued by the International Organization for Standardization (ISO). It is used (mainly) in government and business for fiscal years, as well as in timekeeping. This setting can account for a 53rd week in the year. Read more about ISO time <a href="https://momentjs.com/docs/#/get-set/iso-week/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+              <CodeBlock>
+                {`let settings = {
+  ...
+  week: {
+    id: 'week-disc',
+    iso: true
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
             <DocSection subHeader='Year - Overview' anchor='year-overview'>
               <DocSpecs property='year' />
               <p>A year indicator is commonly included within perpetual calendar complications. It will indicate the current year{String.fromCharCode(39)}s relation to the next leap year. Usually shown as four sections with a rotating hand, the indictor will highlight when the current year is a leap year and show the other year{String.fromCharCode(39)}s position otherwise.</p>
@@ -652,7 +709,7 @@ let demo = new Watch(settings);`}
             <DocSection subHeader='Year - Define the Indicator' anchor='year-definetheindicator'>
               <DocSpecs property='id' type='String' required='True' />
               <p>The <span className='is-code-ref'>year</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the indicator element{String.fromCharCode(39)}s ID. TickTock, by default, expects the initial position of the indicator
-                pointing toward the middle of the first year in the set of four with the fourth year being the leap year.This is different if using <span className='is-code-ref'>offsetMonths</span>.</p>
+                pointing toward the middle of the first year in the set of four with the fourth year being the leap year. This is different if using <span className='is-code-ref'>offsetMonths</span>.</p>
               <CodeBlock>
   {`let settings = {
   ...
@@ -677,14 +734,43 @@ let demo = new Watch(settings);`}
 };`}
               </CodeBlock>
             </DocSection>
+
+            <DocSection subHeader='Calendar - Invert the Direction' anchor='calendar-invertthedirection'>
+              <DocSpecs property='invert' type='Boolean' def='False' />
+              <p>TickTock expects a lot from the design and it is common that a dial or disc is designed with the values in the reverse order (rotating counter-clockwise versus clockwise). Because of this, every Calendar component supports an <span className='is-code-ref'>invert</span> boolean property to determine in which direction the indicator should rotate.</p>
+              <CodeBlock>
+                {`let settings = {
+  ...
+  day: {
+    id: 'day-disc',
+    invert: true
+  },
+  date: {
+    id: 'date-disc',
+    invert: true
+  },
+  week: {
+    id: 'week-disc',
+    invert: true
+  },
+  month: {
+    id: 'month-disc',
+    invert: true
+  }
+  year: {
+    id: 'year-disc',
+    invert: true
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
           </section>
 
           <section ref={section => this.chronographSection = section}>
             <DocSection groupHeader='Chronograph' subHeader='Overview' anchor='chronograph-overview'>
               <DocSpecs property='chronograph' />
               <p>A chronograph is a specific type of watch that is used as a stopwatch combined with a display watch. A basic chronograph has an independent sweep second hand; it can be started, stopped, and returned to zero by successive pressure on the stem.</p>
-              <p>The chronograph functionality is triggered with buttons to start/pause and another to reset the hands. There are many variations of chronographs but TickTock expects the start button to be clicked multiple times to pause and resume. A separate reset button will stop the chronograph and reposition all hands to their original state (which TickTock expects to be at the 12 o${String.fromCharCode(39)}clock position). An exception to this is when the chronograph is set be function as a flyback chronograph in which case the reset button returns the hands to their original position but then continues running - for example, if timing laps around a track.</p>
-              <p>The <span className='is-code-ref'>chronograph</span> objects expects properties for the <span className='is-code-ref'>hands</span>, <span className='is-code-ref'>buttons</span>, and optionally a <span className='is-code-ref'>flyback</span> boolean.</p>
+              <p>The <span className='is-code-ref'>chronograph</span> objects expects properties for the <span className='is-code-ref'>hands</span>, <span className='is-code-ref'>buttons</span>, and optionally a <span className='is-code-ref'>flyback</span> or <span className='is-code-ref'>rattrapante</span> boolean to further adjust the default chronograph functionality.</p>
               <CodeBlock>
 {`settings = {
   dials: [{
@@ -699,8 +785,9 @@ let demo = new Watch(settings);`}
   ],
   chronograph: {
     buttons: {
-      start: 'start-pause-btn',
-      reset: 'reset-btn',
+      primary: 'chrono-primary-btn',
+      secondary: 'chrono-secondary-btn',
+      tertiary: 'chrono-tertiary-btn'
     },
     hands: {
       tenth: 'chrono-tenth-second-hand',
@@ -735,17 +822,18 @@ let demo = new Watch(settings);`}
             <DocSection subHeader='Define the Buttons' anchor='chronograph-definethebuttons'>
               <DocSpecs property='buttons' required='True' />
               <p>The <span className='is-code-ref'>chronograph</span> object expects a <span className='is-code-ref'>buttons</span> object to create references based on element IDs.</p>
-              <p>The buttons can be any HTML element as long as it has an ID to pass to TickTock. The <span className='is-code-ref'>start</span> button acts as a toggle between starting and pausing the chronograph.</p>
-              <p>The <span className='is-code-ref'>reset</span> button by default will stop the chronograph and return the hands to their original positions, which are expected to be at the 12 o{String.fromCharCode(39)}clock position. However, this functionality can be altered by using the <span className='is-code-ref'>flyback</span> property which will then cause the reset button to merely return the hands to their original positions to immediately begin running again without pauing the chronograph.</p>
-              <p>Clicking on a button will add an <span className='is-code-ref'>active</span> class to the element. TickTock does this by default as well as adds a <span className='is-code-ref'>transitionend</span> event listener to each button so a pressing animation can be achieved by adding in the CSS styles to the elements and allowing TickTock to toggle the classes.</p>
+              <p>The buttons can be any HTML element as long as it has an ID to pass to TickTock. There are three button properties that can be supplied, <span className='is-code-ref'>primary</span>, <span className='is-code-ref'>secondary</span>, and <span className='is-code-ref'>tertiary</span>. These properties are expected to be entered sequentially and based upon the number of buttons supplied will set the base functionality for the chronograph.</p>
+              <p>For example, if only the <span className='is-code-ref'>primary</span> button is provided, the chronograph will function as a mono-pusher and cycle through starting, pausing, and reseting the hands.</p>
+              <p>By default, TickTock will add <span className='is-code-ref'>cursor: pointer;</span> to each button. Additionally, clicking a button will add an <span className='is-code-ref'>active</span> class. Commonly, when a button is <span className='is-code-ref'>active</span> it transitions its position to give the impression of being pushed. Lastly, a <span className='is-code-ref'>transitionend</span> event listener is added to the button to remove the <span className='is-code-ref'>active</span> class and transition back to its original position.</p>
               <CodeBlock>
 {`settings = {
   ...
   chronograph: {
     ...
     buttons: {
-      start: 'start-pause-btn',
-      reset: 'reset-btn',
+      primary: 'chrono-primary-btn',
+      secondary: 'chrono-secondary-btn',
+      tertiary: 'chrono-tertiary-btn'
     },
   },
 };`}
@@ -788,7 +876,7 @@ let demo = new Watch(settings);`}
             </DocSection>
 
             <DocSection subHeader='Button Active States' anchor='chronograph-activestates'>
-              <p>Clicking on a button will add an <span className='is-code-ref'>active</span> class to the element. TickTock does this by default as well as adds a <span className='is-code-ref'>transitionend</span> event listener to each button so a pressing animation can be achieved by adding in the CSS styles to the elements and allowing TickTock to toggle the classes.</p>
+              <p>By default, TickTock will add <span className='is-code-ref'>cursor: pointer;</span> to each button. Additionally, clicking a button will add an <span className='is-code-ref'>active</span> class. Commonly, when a button is <span className='is-code-ref'>active</span> it transitions its position to give the impression of being pushed. Lastly, a <span className='is-code-ref'>transitionend</span> event listener is added to the button to remove the <span className='is-code-ref'>active</span> class and transition back to its original position.</p>
             </DocSection>
           </section>
 
@@ -967,27 +1055,6 @@ let demo = new Watch(settings);`}
       }
     }
   }]
-};`}
-              </CodeBlock>
-            </DocSection>
-
-            <DocSection subHeader='GMT Offsets' anchor='dials-gmtoffsets'>
-              <DocSpecs property='offset' type='String' />
-              <p className='is-strong'>WIll be deprecated in v3.0 in lieu of the timezone property</p>
-              <p>TickTock defaults to the local timezone by using Moment JS'{String.fromCharCode(39)} default date object. However, a dial can be given a specific GMT offset value to override this default.</p>
-              <p>The <span className='is-code-ref'>offset</span> property is a string supporting both negative and positive values. The values are relative to the Greenwich Mean Time (GMT). So to set a dial to show the time in New York City the offset property would have a value of {String.fromCharCode(39)}-5{String.fromCharCode(39)}. Whereas showing the time in Singapore would be {String.fromCharCode(39)}+8{String.fromCharCode(39)}.</p>
-              <p>Decimal values are also supported. For example, Delhi would have an <span className='is-code-ref'>offset</span> value of {String.fromCharCode(39)}+5.3{String.fromCharCode(39)}.</p>
-              <CodeBlock>
-  {`let settings = {
-  dials: [{
-    name: 'primary-dial',
-    hands: {
-      hour: 'element-id',
-      minute: 'element-id',
-      second: 'element-id'
-    }
-  }],
-  offset: '+2' // Helsinki, Finland
 };`}
               </CodeBlock>
             </DocSection>

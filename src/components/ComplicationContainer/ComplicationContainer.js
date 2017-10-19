@@ -86,8 +86,8 @@ let demo = new Watch(settings);
   ],
   chronograph: {
     buttons: {
-      start: 'start-pause-btn',
-      reset: 'reset-btn',
+      primary: 'chrono-primary-btn',
+      secondary: 'chrono-secondary-btn',
     },
     hands: {
       tenth: 'chrono-tenth-second-hand',
