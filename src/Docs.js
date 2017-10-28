@@ -1196,7 +1196,7 @@ let demo = new Watch(settings);`}
             </DocSection>
 
             <DocSection subHeader='Define the Range' anchor='eqTime-definetherange'>
-              <DocSpecs property='range' type='Array' required="False" def="[-45, 45]" />
+              <DocSpecs property='range' type='Array' def="[-45, 45]" />
               <p>Many Equation of Time indicators are hands that rotate back and forth along a semi-circle, much like a Power Reserve. The <span className='is-code-ref'>range</span> values define how far in each direction the indicator can rotate. The first number will determine how far the element will rotate counter clockwise to indicate when the solar time is behind the mean time. The second number indicating the range of motion clockwise to indicate when the solar time is ahead of the mean.</p>
               <CodeBlock>
   {`let settings = {
