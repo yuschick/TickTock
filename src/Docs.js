@@ -205,6 +205,24 @@ class Docs extends Component {
           ],
         },
         {
+          header: 'Equation of Time',
+          active: false,
+          items: [
+            {
+              label: 'Overview',
+              anchor: 'eqTime-overview',
+            },
+            {
+              label: 'Define the Element',
+              anchor: 'eqTime-definetheelement',
+            },
+            {
+              label: 'Define the Range',
+              anchor: 'eqTime-definetherange',
+            },
+          ],
+        },
+        {
           header: 'Foudroyante',
           active: false,
           items: [
@@ -219,8 +237,8 @@ class Docs extends Component {
             {
               label: 'Set the Amount of Steps',
               anchor: 'foudroyante-steps',
-            }
-          ]
+            },
+          ],
         },
         {
           header: 'Manual Time (Crown)',
@@ -363,6 +381,7 @@ class Docs extends Component {
     const moonphaseSection = this.moonphaseSection;
     const reserveSection = this.reserveSection;
     const foudroyanteSection = this.foudroyanteSection;
+    const equationOfTimeSection = this.equationOfTimeSection;
 
     if (pos >= 57) {
       this.setState({fixed: true});
@@ -380,8 +399,10 @@ class Docs extends Component {
       this.toggleDocTreeGroups('day-night-indicator');
     } else if (pos > indicatorSection.offsetTop + indicatorSection.clientHeight && pos < dialsSection.offsetTop + dialsSection.clientHeight) {
       this.toggleDocTreeGroups('dials');
-    } else if (pos > dialsSection.offsetTop + dialsSection.clientHeight && pos < foudroyanteSection.offsetTop + foudroyanteSection.clientHeight) {
-      this.toggleDocTreeGroups('foudroyante-(jumping seconds)');
+    } else if (pos > dialsSection.offsetTop + dialsSection.clientHeight && pos < equationOfTimeSection.offsetTop + equationOfTimeSection.clientHeight) {
+      this.toggleDocTreeGroups('equation-of time');
+    } else if (pos > equationOfTimeSection.offsetTop + equationOfTimeSection.clientHeight && pos < foudroyanteSection.offsetTop + foudroyanteSection.clientHeight) {
+      this.toggleDocTreeGroups('foudroyante');
     } else if (pos > foudroyanteSection.offsetTop + foudroyanteSection.clientHeight && pos < crownSection.offsetTop + crownSection.clientHeight) {
       this.toggleDocTreeGroups('manual-time (crown)');
     } else if (pos > crownSection.offsetTop + crownSection.clientHeight && pos < repeaterSection.offsetTop + repeaterSection.clientHeight) {
@@ -1145,6 +1166,50 @@ let demo = new Watch(settings);`}
             </DocSection>
           </section>
 
+          <section ref={section => this.equationOfTimeSection = section}>
+            <DocSection groupHeader='Equation of Time' subHeader='Overview' anchor='eqTime-overview'>
+              <DocSpecs property='eqTime' type='Object' />
+              <p>An equation of time watch shows the difference between {String.fromCharCode(39)}true{String.fromCharCode(39)} solar time (that of Nature) and {String.fromCharCode(39)}mean{String.fromCharCode(39)} solar time (that of Man). This rare and poetic complication is usually combined with other astronomical indications. The solar time offset can be as far as 16 minutes ahead or 14 minutes behind the mean time.</p>
+              <p>This time difference is typically displayed by using a hand that rotates a semi-circle, much like a power reserve, indicating the positive or negative tie offset.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  eqTime: {
+    id: 'eq-hand',
+    range: [-90, 90]
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Define the Element' anchor='eqTime-definetheelement'>
+              <DocSpecs property='id' type='String' required="True" />
+              <p>The <span className='is-code-ref'>eqTime</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the equation of time element{String.fromCharCode(39)}s ID. TickTock expects the hand to be designed in its <span className='is-code-ref'>0</span> position.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  eqTime: {
+    id: 'eq-hand'
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+
+            <DocSection subHeader='Define the Range' anchor='eqTime-definetherange'>
+              <DocSpecs property='range' type='Array' required="False" def="[-45, 45]" />
+              <p>Many Equation of Time indicators are hands that rotate back and forth along a semi-circle, much like a Power Reserve. The <span className='is-code-ref'>range</span> values define how far in each direction the indicator can rotate. The first number will determine how far the element will rotate counter clockwise to indicate when the solar time is behind the mean time. The second number indicating the range of motion clockwise to indicate when the solar time is ahead of the mean.</p>
+              <CodeBlock>
+  {`let settings = {
+  ...
+  eqTime: {
+    id: 'eq-hand',
+    range: [-90, 90]
+  }
+};`}
+              </CodeBlock>
+            </DocSection>
+          </section>
+
           <section ref={section => this.foudroyanteSection = section}>
             <DocSection groupHeader='Foudroyante (Jumping Seconds)' subHeader='Overview' anchor='foudroyante-overview'>
               <DocSpecs property='foudroyante' type='Object' />
@@ -1163,7 +1228,7 @@ let demo = new Watch(settings);`}
 
             <DocSection subHeader='Define the Element' anchor='foudroyante-definetheelement'>
               <DocSpecs property='id' type='String' required="True" />
-              <p>The <span className='is-code-ref'>foudroyante</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the foudroyante hand's element{String.fromCharCode(39)}s ID. TickTock expects the hand to be designed in its beginning position, typically 12 o' clock.</p>
+              <p>The <span className='is-code-ref'>foudroyante</span> object accepts an <span className='is-code-ref'>id</span> property. This property expects a string value of the foudroyante hand{String.fromCharCode(39)}s element{String.fromCharCode(39)}s ID. TickTock expects the hand to be designed in its beginning position, typically 12 o' clock.</p>
               <CodeBlock>
   {`let settings = {
   ...
