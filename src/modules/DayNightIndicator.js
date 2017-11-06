@@ -28,7 +28,14 @@ class DayNightIndicator {
             30 :
             15;
 
+        this.settingTime = false;
+        this.increment = 90;
+
         if (!this.parent.testing) this.init();
+    }
+
+    toggleSettingTime() {
+        this.settingTime = !this.settingTime;
     }
 
     toggleAMPM() {
@@ -39,22 +46,39 @@ class DayNightIndicator {
         this.element.style.transition = 'none';
     }
 
-    rotateIndicator() {
-        let rotateValue = 0;
+    getRotateValue() {
+        let rotateVal = 0;
 
         if (this.hours >= 0 && this.hours < 6) {
-            rotateValue = this.invert ? 180 : 0;
+            rotateVal = this.invert ? 180 : 0;
         } else if (this.hours >= 6 && this.hours < 12) {
-            rotateValue = 90;
+            rotateVal = 90;
         } else if (this.hours >= 12 && this.hours < 18) {
-            rotateValue = this.invert ? 0 : 180;
+            rotateVal = this.invert ? 0 : 180;
         } else {
-            rotateValue = 270;
+            rotateVal = 270;
         }
 
-        if (this.invert) rotateValue = rotateValue * -1;
+        if (this.invert) rotateVal = rotateVal * -1;
 
-        this.element.style.transform = `rotate(${rotateValue}deg)`;
+        return rotateVal;
+    }
+
+    rotateElement(dir = null) {
+        let rotateVal = 0;
+
+        if (this.settingTime) {
+            rotateVal = this.parent.getCurrentRotateValue(this.element);
+            if (dir) {
+                rotateVal -= this.increment;
+            } else {
+                rotateVal += this.increment;
+            }
+        } else {
+            rotateVal = this.getRotateValue();
+        }
+
+        this.element.style.transform = `rotate(${rotateVal}deg)`;
     }
 
     getHourHandAngle() {
@@ -74,12 +98,12 @@ class DayNightIndicator {
         this.hours = this.isAM ? this.hours : this.hours + 12;
         this.hours = this.hours === 24 ? 0 : this.hours;
 
-        this.rotateIndicator();
+        this.rotateElement();
     }
 
     init() {
         this.removeTransitionDuration();
-        this.rotateIndicator();
+        this.rotateElement();
     }
 }
 

@@ -98,7 +98,7 @@ class Dial {
     startInterval() {
         this.interval = setInterval(() => {
             this.getCurrentTime();
-            this.rotateHands();
+            this.rotateElement();
         }, 1000);
     }
 
@@ -128,7 +128,7 @@ class Dial {
         this.parent.dayNightIndicator.convertAngleToHours(this.name);
     }
 
-    rotateHands(dir = null) {
+    rotateElement(dir = null) {
         let rotateVal;
 
         if (this.hands.hour) {
@@ -216,13 +216,13 @@ class Dial {
             this.hands.second.style.transform = `rotate(${rotateVal}deg)`;
         }
 
-        if (this.parent.dayNightIndicator) this.checkForDayNightUpdates();
+        if (this.parent.dayNightIndicator && !this.settingTime) this.checkForDayNightUpdates();
     }
 
     init() {
         setTimeout(() => {
             this.getCurrentTime();
-            this.rotateHands();
+            this.rotateElement();
 
             setTimeout(() => {
                 if (this.hands.second && this.sweepingSeconds) {

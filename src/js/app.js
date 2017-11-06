@@ -148,6 +148,43 @@ const Watch = require('./../index');
 
     demo = new Watch(settings);
 
+    /*
+     * Manual Setting of Complications  Demo
+     */
+    settings = {
+        dials: [{
+            hands: {
+                hour: 'crown-hour-hand',
+                minute: 'crown-minute-hand',
+                second: 'crown-second-hand',
+            },
+            timezone: "America/New_York"
+        }],
+        crown: {
+            id: 'crown-button',
+        },
+        date: {
+            id: 'crown-date-disc'
+        },
+        moonphase: {
+            id: 'crown-moonphase-disc'
+        },
+        year: {
+            id: 'crown-year-indicator-disc'
+        },
+        week: {
+            id: 'crown-week-display-ring'
+        },
+        dayNightIndicator: {
+            id: 'crown-daynight-disc'
+        },
+        day: {
+            id: 'crown-day-disc',
+        },
+    };
+
+    demo = new Watch(settings);
+
     // settings = {
     //     dials: [{
     //         hands: {

@@ -18,7 +18,7 @@ class Crown {
 
     toggleCrown() {
         this.crownActive = !this.crownActive;
-        this.parent.dialInstances.forEach((instance) => {
+        this.parent.manualInstances.forEach((instance) => {
             if (instance.toggleActiveCrown)
                 instance.toggleActiveCrown();
         });
@@ -26,7 +26,7 @@ class Crown {
         if (this.crownActive) {
             this.parent.stopInterval();
             this.crown.classList.add('active');
-            this.parent.dialInstances.forEach((instance) => {
+            this.parent.manualInstances.forEach((instance) => {
                 if (instance.toggleSettingTime)
                     instance.toggleSettingTime();
             });
@@ -34,7 +34,7 @@ class Crown {
             this.parent.startInterval();
             this.parent.resetActiveDial();
             this.crown.classList.remove('active');
-            this.parent.dialInstances.forEach((instance) => {
+            this.parent.manualInstances.forEach((instance) => {
                 if (instance.toggleSettingTime)
                     instance.toggleSettingTime();
                 if (instance.updateToManualTime)

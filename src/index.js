@@ -28,6 +28,7 @@ class Watch {
         if (!settings.dials) throw new ReferenceError('At least one dial is required for the Watch class.');
 
         this.dialInstances = [];
+        this.manualInstances = [];
         this.activeDial = 0;
         this.globalInterval = null;
         this.rightNow = Moment();
@@ -35,6 +36,7 @@ class Watch {
         settings.dials.forEach((dial) => {
             let tempDial = new Dial(dial, this);
             this.dialInstances.push(tempDial);
+            this.manualInstances.push(tempDial);
         });
 
         if (settings.crown) {
@@ -46,7 +48,9 @@ class Watch {
         }
 
         if (settings.moonphase) {
-            this.moonphase = new MoonPhase(settings.moonphase, this);
+            let tempDial = new MoonPhase(settings.moonphase, this);
+            this.moonphase = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.repeater) {
@@ -56,15 +60,21 @@ class Watch {
 
         if (settings.dayNightIndicator) {
             this.dayNightIndicatorDial = settings.dayNightIndicator.dial || 0;
-            this.dayNightIndicator = new DayNightIndicator(this.dialInstances[this.dayNightIndicatorDial], settings.dayNightIndicator, this);
+            let tempDial = new DayNightIndicator(this.dialInstances[this.dayNightIndicatorDial], settings.dayNightIndicator, this);
+            this.dayNightIndicator = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.dayIndicator || settings.day) {
-            this.dayIndicator = new DayIndicator(settings.dayIndicator || settings.day, this);
+            let tempDial = new DayIndicator(settings.dayIndicator || settings.day, this);
+            this.dayIndicator = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.date) {
-            this.dateIndicator = new DateIndicator(settings.date, this);
+            let tempDial = new DateIndicator(settings.date, this);
+            this.dateIndicator = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.month) {
@@ -72,11 +82,15 @@ class Watch {
         }
 
         if (settings.week) {
-            this.weekIndicator = new WeekIndicator(settings.week, this);
+            let tempDial = new WeekIndicator(settings.week, this);
+            this.weekIndicator = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.year) {
-            this.yearIndicator = new YearIndicator(settings.year, this);
+            let tempDial = new YearIndicator(settings.year, this);
+            this.yearIndicator = tempDial;
+            this.manualInstances.push(tempDial);
         }
 
         if (settings.chronograph) {
@@ -126,16 +140,16 @@ class Watch {
                                 this.powerReserve.incrementReserve();
                             break;
                         case 38:
-                            this.dialInstances[this.activeDial].rotateHands();
+                            this.manualInstances[this.activeDial].rotateElement();
                             break;
                         case 39:
                             this.activeDial++;
 
-                            if (this.activeDial >= this.dialInstances.length) this.activeDial = 0;
+                            if (this.activeDial >= this.manualInstances.length) this.activeDial = 0;
 
                             break;
                         case 40:
-                            this.dialInstances[this.activeDial].rotateHands('back');
+                            this.manualInstances[this.activeDial].rotateElement('back');
                             break;
                     }
                 }
@@ -151,7 +165,7 @@ class Watch {
 
             this.dialInstances.forEach((dial) => {
                 dial.getCurrentTime();
-                dial.rotateHands();
+                dial.rotateElement();
             });
 
             if (this.powerReserve) {

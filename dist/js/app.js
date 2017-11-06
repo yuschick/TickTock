@@ -196,6 +196,43 @@
 
 	    demo = new Watch(settings);
 
+	    /*
+	     * Manual Setting of Complications  Demo
+	     */
+	    settings = {
+	        dials: [{
+	            hands: {
+	                hour: 'crown-hour-hand',
+	                minute: 'crown-minute-hand',
+	                second: 'crown-second-hand'
+	            },
+	            timezone: "America/New_York"
+	        }],
+	        crown: {
+	            id: 'crown-button'
+	        },
+	        date: {
+	            id: 'crown-date-disc'
+	        },
+	        moonphase: {
+	            id: 'crown-moonphase-disc'
+	        },
+	        year: {
+	            id: 'crown-year-indicator-disc'
+	        },
+	        week: {
+	            id: 'crown-week-display-ring'
+	        },
+	        dayNightIndicator: {
+	            id: 'crown-daynight-disc'
+	        },
+	        day: {
+	            id: 'crown-day-disc'
+	        }
+	    };
+
+	    demo = new Watch(settings);
+
 	    // settings = {
 	    //     dials: [{
 	    //         hands: {
@@ -364,6 +401,7 @@
 	        if (!settings.dials) throw new ReferenceError('At least one dial is required for the Watch class.');
 
 	        this.dialInstances = [];
+	        this.manualInstances = [];
 	        this.activeDial = 0;
 	        this.globalInterval = null;
 	        this.rightNow = Moment();
@@ -371,6 +409,7 @@
 	        settings.dials.forEach(function (dial) {
 	            var tempDial = new Dial(dial, _this);
 	            _this.dialInstances.push(tempDial);
+	            _this.manualInstances.push(tempDial);
 	        });
 
 	        if (settings.crown) {
@@ -382,7 +421,9 @@
 	        }
 
 	        if (settings.moonphase) {
-	            this.moonphase = new MoonPhase(settings.moonphase, this);
+	            var tempDial = new MoonPhase(settings.moonphase, this);
+	            this.moonphase = tempDial;
+	            this.manualInstances.push(tempDial);
 	        }
 
 	        if (settings.repeater) {
@@ -392,15 +433,21 @@
 
 	        if (settings.dayNightIndicator) {
 	            this.dayNightIndicatorDial = settings.dayNightIndicator.dial || 0;
-	            this.dayNightIndicator = new DayNightIndicator(this.dialInstances[this.dayNightIndicatorDial], settings.dayNightIndicator, this);
+	            var _tempDial = new DayNightIndicator(this.dialInstances[this.dayNightIndicatorDial], settings.dayNightIndicator, this);
+	            this.dayNightIndicator = _tempDial;
+	            this.manualInstances.push(_tempDial);
 	        }
 
 	        if (settings.dayIndicator || settings.day) {
-	            this.dayIndicator = new DayIndicator(settings.dayIndicator || settings.day, this);
+	            var _tempDial2 = new DayIndicator(settings.dayIndicator || settings.day, this);
+	            this.dayIndicator = _tempDial2;
+	            this.manualInstances.push(_tempDial2);
 	        }
 
 	        if (settings.date) {
-	            this.dateIndicator = new DateIndicator(settings.date, this);
+	            var _tempDial3 = new DateIndicator(settings.date, this);
+	            this.dateIndicator = _tempDial3;
+	            this.manualInstances.push(_tempDial3);
 	        }
 
 	        if (settings.month) {
@@ -408,11 +455,15 @@
 	        }
 
 	        if (settings.week) {
-	            this.weekIndicator = new WeekIndicator(settings.week, this);
+	            var _tempDial4 = new WeekIndicator(settings.week, this);
+	            this.weekIndicator = _tempDial4;
+	            this.manualInstances.push(_tempDial4);
 	        }
 
 	        if (settings.year) {
-	            this.yearIndicator = new YearIndicator(settings.year, this);
+	            var _tempDial5 = new YearIndicator(settings.year, this);
+	            this.yearIndicator = _tempDial5;
+	            this.manualInstances.push(_tempDial5);
 	        }
 
 	        if (settings.chronograph) {
@@ -465,16 +516,16 @@
 	                                if (_this2.powerReserve) _this2.powerReserve.incrementReserve();
 	                                break;
 	                            case 38:
-	                                _this2.dialInstances[_this2.activeDial].rotateHands();
+	                                _this2.manualInstances[_this2.activeDial].rotateElement();
 	                                break;
 	                            case 39:
 	                                _this2.activeDial++;
 
-	                                if (_this2.activeDial >= _this2.dialInstances.length) _this2.activeDial = 0;
+	                                if (_this2.activeDial >= _this2.manualInstances.length) _this2.activeDial = 0;
 
 	                                break;
 	                            case 40:
-	                                _this2.dialInstances[_this2.activeDial].rotateHands('back');
+	                                _this2.manualInstances[_this2.activeDial].rotateElement('back');
 	                                break;
 	                        }
 	                    }
@@ -492,7 +543,7 @@
 
 	                _this3.dialInstances.forEach(function (dial) {
 	                    dial.getCurrentTime();
-	                    dial.rotateHands();
+	                    dial.rotateElement();
 	                });
 
 	                if (_this3.powerReserve) {
@@ -16856,7 +16907,7 @@
 
 	            this.interval = setInterval(function () {
 	                _this.getCurrentTime();
-	                _this.rotateHands();
+	                _this.rotateElement();
 	            }, 1000);
 	        }
 	    }, {
@@ -16890,8 +16941,8 @@
 	            this.parent.dayNightIndicator.convertAngleToHours(this.name);
 	        }
 	    }, {
-	        key: 'rotateHands',
-	        value: function rotateHands() {
+	        key: 'rotateElement',
+	        value: function rotateElement() {
 	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
 	            var rotateVal = void 0;
@@ -16974,7 +17025,7 @@
 	                this.hands.second.style.transform = 'rotate(' + rotateVal + 'deg)';
 	            }
 
-	            if (this.parent.dayNightIndicator) this.checkForDayNightUpdates();
+	            if (this.parent.dayNightIndicator && !this.settingTime) this.checkForDayNightUpdates();
 	        }
 	    }, {
 	        key: 'init',
@@ -16983,7 +17034,7 @@
 
 	            setTimeout(function () {
 	                _this2.getCurrentTime();
-	                _this2.rotateHands();
+	                _this2.rotateElement();
 
 	                setTimeout(function () {
 	                    if (_this2.hands.second && _this2.sweepingSeconds) {
@@ -17654,21 +17705,21 @@
 	        key: 'toggleCrown',
 	        value: function toggleCrown() {
 	            this.crownActive = !this.crownActive;
-	            this.parent.dialInstances.forEach(function (instance) {
+	            this.parent.manualInstances.forEach(function (instance) {
 	                if (instance.toggleActiveCrown) instance.toggleActiveCrown();
 	            });
 
 	            if (this.crownActive) {
 	                this.parent.stopInterval();
 	                this.crown.classList.add('active');
-	                this.parent.dialInstances.forEach(function (instance) {
+	                this.parent.manualInstances.forEach(function (instance) {
 	                    if (instance.toggleSettingTime) instance.toggleSettingTime();
 	                });
 	            } else {
 	                this.parent.startInterval();
 	                this.parent.resetActiveDial();
 	                this.crown.classList.remove('active');
-	                this.parent.dialInstances.forEach(function (instance) {
+	                this.parent.manualInstances.forEach(function (instance) {
 	                    if (instance.toggleSettingTime) instance.toggleSettingTime();
 	                    if (instance.updateToManualTime) instance.updateToManualTime();
 	                });
@@ -17824,6 +17875,10 @@
 	        this.element = document.getElementById(settings.id);
 	        this.invert = settings.invert || false;
 
+	        // 29.53059 days per lunar month
+	        this.increment = 29.53059;
+	        this.settingTime = false;
+
 	        if (!this.parent.testing) this.init();
 	    }
 
@@ -17833,15 +17888,35 @@
 	            if (!settings.id) throw new ReferenceError('The MoonPhase class requires that an ID of the moonphase element be provided.');
 	        }
 	    }, {
-	        key: 'rotateDisc',
-	        value: function rotateDisc(val) {
-	            val = this.invert ? val * -1 : val;
-	            this.element.style.transform = 'rotate(' + val + 'deg)';
+	        key: 'toggleSettingTime',
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
+	        }
+	    }, {
+	        key: 'rotateElement',
+	        value: function rotateElement() {
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            var rotateVal = 0;
+
+	            if (this.settingTime) {
+	                rotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (dir) {
+	                    rotateVal -= this.increment / 2;
+	                } else {
+	                    rotateVal += this.increment / 2;
+	                }
+	            } else {
+	                rotateVal = this.getCurrentPhase(this.moon_day(this.rightNow));
+	                if (this.invert) rotateVal *= -1;
+	            }
+
+	            this.element.style.transform = 'rotate(' + rotateVal + 'deg)';
 	        }
 
 	        /*
-	          Shouts to: https://github.com/tingletech/moon-phase
-	        */
+	            Shouts to: https://github.com/tingletech/moon-phase
+	          */
 
 	    }, {
 	        key: 'moon_day',
@@ -17885,20 +17960,19 @@
 	                F -= 0.4068 * Math.sin(M6) + (0.1734 - 0.000393 * T) * Math.sin(M5);
 	                F += 0.0161 * Math.sin(2 * M6) + 0.0104 * Math.sin(2 * B6);
 	                F -= 0.0074 * Math.sin(M5 - M6) - 0.0051 * Math.sin(M5 + M6);
-	                F += 0.0021 * Math.sin(2 * M5) + 0.0010 * Math.sin(2 * B6 - M6);
+	                F += 0.0021 * Math.sin(2 * M5) + 0.001 * Math.sin(2 * B6 - M6);
 	                F += 0.5 / 1440;
 	                oldJ = jday;
 	                jday = J0 + 28 * phase + Math.floor(F);
 	                phase++;
 	            }
 
-	            // 29.53059 days per lunar month
-	            return (thisJD - oldJ) / 29.53059;
+	            return (thisJD - oldJ) / this.increment;
 	        }
 
 	        /*
-	          Shouts to: https://github.com/tingletech/moon-phase
-	        */
+	            Shouts to: https://github.com/tingletech/moon-phase
+	          */
 
 	    }, {
 	        key: 'getCurrentPhase',
@@ -17909,12 +17983,12 @@
 	            if (phase <= 0.25) {
 	                sweep = [1, 0];
 	                mag = 20 - 20 * phase * 4;
-	            } else if (phase <= 0.50) {
+	            } else if (phase <= 0.5) {
 	                sweep = [0, 0];
 	                mag = 20 * (phase - 0.25) * 4;
 	            } else if (phase <= 0.75) {
 	                sweep = [1, 1];
-	                mag = 20 - 20 * (phase - 0.50) * 4;
+	                mag = 20 - 20 * (phase - 0.5) * 4;
 	            } else if (phase <= 1) {
 	                sweep = [0, 1];
 	                mag = 20 * (phase - 0.75) * 4;
@@ -17923,12 +17997,12 @@
 	            }
 
 	            phase = phase.toFixed(5) * 3.6;
-	            this.rotateDisc(phase * 100);
+	            return phase * 100;
 	        }
 	    }, {
 	        key: 'init',
 	        value: function init() {
-	            this.getCurrentPhase(this.moon_day(this.rightNow));
+	            this.rotateElement();
 	        }
 	    }]);
 
@@ -18221,10 +18295,18 @@
 	        this.hourAngle = 0;
 	        this.hourDivisor = dial.format === 12 ? 30 : 15;
 
+	        this.settingTime = false;
+	        this.increment = 90;
+
 	        if (!this.parent.testing) this.init();
 	    }
 
 	    _createClass(DayNightIndicator, [{
+	        key: "toggleSettingTime",
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
+	        }
+	    }, {
 	        key: "toggleAMPM",
 	        value: function toggleAMPM() {
 	            this.isAM = !this.isAM;
@@ -18235,23 +18317,43 @@
 	            this.element.style.transition = 'none';
 	        }
 	    }, {
-	        key: "rotateIndicator",
-	        value: function rotateIndicator() {
-	            var rotateValue = 0;
+	        key: "getRotateValue",
+	        value: function getRotateValue() {
+	            var rotateVal = 0;
 
 	            if (this.hours >= 0 && this.hours < 6) {
-	                rotateValue = this.invert ? 180 : 0;
+	                rotateVal = this.invert ? 180 : 0;
 	            } else if (this.hours >= 6 && this.hours < 12) {
-	                rotateValue = 90;
+	                rotateVal = 90;
 	            } else if (this.hours >= 12 && this.hours < 18) {
-	                rotateValue = this.invert ? 0 : 180;
+	                rotateVal = this.invert ? 0 : 180;
 	            } else {
-	                rotateValue = 270;
+	                rotateVal = 270;
 	            }
 
-	            if (this.invert) rotateValue = rotateValue * -1;
+	            if (this.invert) rotateVal = rotateVal * -1;
 
-	            this.element.style.transform = "rotate(" + rotateValue + "deg)";
+	            return rotateVal;
+	        }
+	    }, {
+	        key: "rotateElement",
+	        value: function rotateElement() {
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            var rotateVal = 0;
+
+	            if (this.settingTime) {
+	                rotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (dir) {
+	                    rotateVal -= this.increment;
+	                } else {
+	                    rotateVal += this.increment;
+	                }
+	            } else {
+	                rotateVal = this.getRotateValue();
+	            }
+
+	            this.element.style.transform = "rotate(" + rotateVal + "deg)";
 	        }
 	    }, {
 	        key: "getHourHandAngle",
@@ -18273,13 +18375,13 @@
 	            this.hours = this.isAM ? this.hours : this.hours + 12;
 	            this.hours = this.hours === 24 ? 0 : this.hours;
 
-	            this.rotateIndicator();
+	            this.rotateElement();
 	        }
 	    }, {
 	        key: "init",
 	        value: function init() {
 	            this.removeTransitionDuration();
-	            this.rotateIndicator();
+	            this.rotateElement();
 	        }
 	    }]);
 
@@ -18323,19 +18425,26 @@
 	        this.max = this.retrograde ? this.retrograde.max : 180;
 	        this.invert = settings.invert || false;
 
+	        this.settingTime = false;
+	        this.increment = this.retrograde ? this.max / 7 : 51.43;
+
 	        if (!this.parent.testing) this.init();
 	    }
 
 	    _createClass(DayIndicator, [{
+	        key: "toggleSettingTime",
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
+	        }
+	    }, {
 	        key: "getRotateValue",
 	        value: function getRotateValue() {
 	            var value = 0;
 
 	            if (this.retrograde) {
-	                var rotateValue = this.max / 7;
-	                value = this.day * rotateValue;
+	                value = this.day * this.increment;
 	            } else {
-	                value = this.day * 51.43;
+	                value = this.day * this.increment;
 	                if (this.offsetHours) {
 	                    value += this.hours * 2.14;
 	                }
@@ -18348,7 +18457,22 @@
 	    }, {
 	        key: "rotateElement",
 	        value: function rotateElement() {
-	            this.element.style.transform = "rotate(" + this.getRotateValue() + "deg)";
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            var rotateVal = 0;
+
+	            if (this.settingTime) {
+	                rotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (dir) {
+	                    rotateVal -= this.increment;
+	                } else {
+	                    rotateVal += this.increment;
+	                }
+	            } else {
+	                rotateVal = this.getRotateValue();
+	            }
+
+	            this.element.style.transform = "rotate(" + rotateVal + "deg)";
 	        }
 	    }, {
 	        key: "init",
@@ -18394,6 +18518,7 @@
 	            this.tenths = document.getElementById(settings.split.tenths);
 	        } else {
 	            this.element = document.getElementById(settings.id);
+	            this.increment = 11.61;
 	        }
 
 	        this.parent = parentWatch;
@@ -18401,6 +18526,8 @@
 	        this.retrograde = settings.retrograde || null;
 	        this.max = this.retrograde ? this.retrograde.max : 180;
 	        this.invert = settings.invert || false;
+
+	        this.settingTime = false;
 
 	        if (!this.parent.testing) this.init();
 	    }
@@ -18435,7 +18562,7 @@
 	                        value = tenths * 90;
 	                    }
 	                } else {
-	                    value = (this.date - 1) * 11.61;
+	                    value = (this.date - 1) * this.increment;
 	                }
 	            }
 
@@ -18446,12 +18573,31 @@
 	    }, {
 	        key: 'rotateElement',
 	        value: function rotateElement() {
-	            if (this.split) {
-	                this.ones.style.transform = 'rotate(' + this.getRotateValue('ones') + 'deg)';
-	                this.tenths.style.transform = 'rotate(' + this.getRotateValue('tenths') + 'deg)';
-	            } else {
-	                this.element.style.transform = 'rotate(' + this.getRotateValue() + 'deg)';
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            if (this.settingTime) {
+	                var currentRotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (this.settingTime) {
+	                    if (dir) {
+	                        currentRotateVal -= this.increment;
+	                    } else {
+	                        currentRotateVal += this.increment;
+	                    }
+	                    this.element.style.transform = 'rotate(' + currentRotateVal + 'deg)';
+	                } else {
+	                    if (this.split) {
+	                        this.ones.style.transform = 'rotate(' + this.getRotateValue('ones') + 'deg)';
+	                        this.tenths.style.transform = 'rotate(' + this.getRotateValue('tenths') + 'deg)';
+	                    } else {
+	                        this.element.style.transform = 'rotate(' + this.getRotateValue() + 'deg)';
+	                    }
+	                }
 	            }
+	        }
+	    }, {
+	        key: 'toggleSettingTime',
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
 	        }
 	    }, {
 	        key: 'init',
@@ -18568,6 +18714,8 @@
 	        this.weekAmount = this.iso ? 53 : 52;
 	        this.increment = 360 / this.weekAmount;
 
+	        this.settingTime = false;
+
 	        if (!this.parent.testing) this.init();
 	    }
 
@@ -18577,18 +18725,43 @@
 	            if (!settings.id) throw new ReferenceError('The Week Indicator class requires that an ID of the element be provided.');
 	        }
 	    }, {
+	        key: 'toggleSettingTime',
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
+	        }
+	    }, {
 	        key: 'getWeekValue',
 	        value: function getWeekValue() {
 	            var rightNow = this.parent.rightNow;
 	            this.week = this.iso ? rightNow.isoWeek() - 1 : rightNow.week() - 1;
 
-	            this.rotateHands();
+	            this.rotateElement();
 	        }
 	    }, {
-	        key: 'rotateHands',
-	        value: function rotateHands() {
+	        key: 'getRotateValue',
+	        value: function getRotateValue() {
 	            var rotateVal = this.week * this.increment;
 	            if (this.invert) rotateVal *= -1;
+
+	            return rotateVal;
+	        }
+	    }, {
+	        key: 'rotateElement',
+	        value: function rotateElement() {
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            var rotateVal = 0;
+
+	            if (this.settingTime) {
+	                rotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (dir) {
+	                    rotateVal -= this.increment;
+	                } else {
+	                    rotateVal += this.increment;
+	                }
+	            } else {
+	                rotateVal = this.getRotateValue();
+	            }
 
 	            this.element.style.transform = 'rotate(' + rotateVal + 'deg)';
 	        }
@@ -18635,10 +18808,18 @@
 	        this.offsetMonths = settings.offsetMonths || false;
 	        this.invert = settings.invert || false;
 
+	        this.increment = 90;
+	        this.settingTime = false;
+
 	        if (!this.parent.testing) this.init();
 	    }
 
 	    _createClass(YearIndicator, [{
+	        key: 'toggleSettingTime',
+	        value: function toggleSettingTime() {
+	            this.settingTime = !this.settingTime;
+	        }
+	    }, {
 	        key: 'getRotateValue',
 	        value: function getRotateValue() {
 	            var value = 0;
@@ -18662,7 +18843,22 @@
 	    }, {
 	        key: 'rotateElement',
 	        value: function rotateElement() {
-	            this.element.style.transform = 'rotate(' + this.getRotateValue() + 'deg)';
+	            var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+	            var rotateVal = 0;
+
+	            if (this.settingTime) {
+	                rotateVal = this.parent.getCurrentRotateValue(this.element);
+	                if (dir) {
+	                    rotateVal -= this.increment;
+	                } else {
+	                    rotateVal += this.increment;
+	                }
+	            } else {
+	                rotateVal = this.getRotateValue();
+	            }
+
+	            this.element.style.transform = 'rotate(' + rotateVal + 'deg)';
 	        }
 	    }, {
 	        key: 'init',
@@ -19072,7 +19268,12 @@
 	// @params settings: object
 	// @params parentWatch: Watch instance
 	//
-	// Notes
+	// The Equation of Time functions very similarly to the Power Reserve.
+	// An ID of the indicator is provided and based on the true solar time
+	// the indicator is adjusted to display the time variance.
+	// A range can be provided (defaults to [-45, 45])
+	// Each range is then split into 14 or 16 segments, one for each variant minute
+	//
 	// Logic taken from: http://www2.arnes.si/~gljsentvid10/sunset_rise.html
 
 	var Timezone = __webpack_require__(124);
@@ -19116,6 +19317,7 @@
 	        key: 'errorChecking',
 	        value: function errorChecking(settings) {
 	            if (!settings.id) throw new ReferenceError('The Equation of Time Class requires that an ID of the indicator element be provided.');
+	            if (settings.range && settings.range.length > 2) throw new ReferenceError('The range property requires two numericd values.');
 	        }
 	    }, {
 	        key: 'getIncrement',

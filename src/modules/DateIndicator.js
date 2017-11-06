@@ -18,6 +18,7 @@ class DateIndicator {
             this.tenths = document.getElementById(settings.split.tenths);
         } else {
             this.element = document.getElementById(settings.id);
+            this.increment = 11.61;
         }
 
         this.parent = parentWatch;
@@ -26,14 +27,26 @@ class DateIndicator {
         this.max = this.retrograde ? this.retrograde.max : 180;
         this.invert = settings.invert || false;
 
+        this.settingTime = false;
+
         if (!this.parent.testing) this.init();
     }
 
     errorChecking(settings) {
-        if (!settings.id && !settings.split) throw new ReferenceError('The Date Indicator class requires that an ID of the indiciator element be provided.');
-        if (settings.id && settings.split) throw new ReferenceError('Choose EITHER a primary or split indicator.');
-        if (settings.retrograde && settings.split) throw new ReferenceError('Choose EITHER a retrograde or split indicator.');
-        if (settings.split && (!settings.split.ones || !settings.split.tenths)) throw new ReferenceError('When choosing a split date display please provide the IDs for both the ones and tenths discs.');
+        if (!settings.id && !settings.split)
+            throw new ReferenceError(
+                'The Date Indicator class requires that an ID of the indiciator element be provided.'
+            );
+        if (settings.id && settings.split)
+            throw new ReferenceError('Choose EITHER a primary or split indicator.');
+        if (settings.retrograde && settings.split)
+            throw new ReferenceError(
+                'Choose EITHER a retrograde or split indicator.'
+            );
+        if (settings.split && (!settings.split.ones || !settings.split.tenths))
+            throw new ReferenceError(
+                'When choosing a split date display please provide the IDs for both the ones and tenths discs.'
+            );
     }
 
     getRotateValue(type = null) {
@@ -54,7 +67,7 @@ class DateIndicator {
                     value = tenths * 90;
                 }
             } else {
-                value = (this.date - 1) * 11.61;
+                value = (this.date - 1) * this.increment;
             }
         }
 
@@ -63,13 +76,29 @@ class DateIndicator {
         return value;
     }
 
-    rotateElement() {
-        if (this.split) {
-            this.ones.style.transform = `rotate(${this.getRotateValue('ones')}deg)`;
-            this.tenths.style.transform = `rotate(${this.getRotateValue('tenths')}deg)`;
-        } else {
-            this.element.style.transform = `rotate(${this.getRotateValue()}deg)`;
+    rotateElement(dir = null) {
+        if (this.settingTime) {
+            let currentRotateVal = this.parent.getCurrentRotateValue(this.element);
+            if (this.settingTime) {
+                if (dir) {
+                    currentRotateVal -= this.increment;
+                } else {
+                    currentRotateVal += this.increment;
+                }
+                this.element.style.transform = `rotate(${currentRotateVal}deg)`;
+            } else {
+                if (this.split) {
+                    this.ones.style.transform = `rotate(${this.getRotateValue('ones')}deg)`;
+                    this.tenths.style.transform = `rotate(${this.getRotateValue('tenths')}deg)`;
+                } else {
+                    this.element.style.transform = `rotate(${this.getRotateValue()}deg)`;
+                }
+            }
         }
+    }
+
+    toggleSettingTime() {
+        this.settingTime = !this.settingTime;
     }
 
     init() {

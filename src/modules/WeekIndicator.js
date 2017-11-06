@@ -22,6 +22,8 @@ class WeekIndicator {
         this.weekAmount = this.iso ? 53 : 52;
         this.increment = 360 / this.weekAmount;
 
+        this.settingTime = false;
+
         if (!this.parent.testing) this.init();
     }
 
@@ -29,16 +31,37 @@ class WeekIndicator {
         if (!settings.id) throw new ReferenceError('The Week Indicator class requires that an ID of the element be provided.');
     }
 
+    toggleSettingTime() {
+        this.settingTime = !this.settingTime;
+    }
+
     getWeekValue() {
         const rightNow = this.parent.rightNow;
         this.week = this.iso ? rightNow.isoWeek() - 1 : rightNow.week() - 1;
 
-        this.rotateHands();
+        this.rotateElement();
     }
 
-    rotateHands() {
+    getRotateValue() {
         let rotateVal = this.week * this.increment;
         if (this.invert) rotateVal *= -1;
+
+        return rotateVal;
+    }
+
+    rotateElement(dir = null) {
+        let rotateVal = 0;
+
+        if (this.settingTime) {
+            rotateVal = this.parent.getCurrentRotateValue(this.element);
+            if (dir) {
+                rotateVal -= this.increment;
+            } else {
+                rotateVal += this.increment;
+            }
+        } else {
+            rotateVal = this.getRotateValue();
+        }
 
         this.element.style.transform = `rotate(${rotateVal}deg)`;
     }

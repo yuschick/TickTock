@@ -21,17 +21,23 @@ class DayIndicator {
         this.max = this.retrograde ? this.retrograde.max : 180;
         this.invert = settings.invert || false;
 
+        this.settingTime = false;
+        this.increment = this.retrograde ? this.max / 7 : 51.43;
+
         if (!this.parent.testing) this.init();
+    }
+
+    toggleSettingTime() {
+        this.settingTime = !this.settingTime;
     }
 
     getRotateValue() {
         let value = 0;
 
         if (this.retrograde) {
-            let rotateValue = this.max / 7;
-            value = (this.day) * rotateValue;
+            value = (this.day) * this.increment;
         } else {
-            value = this.day * 51.43;
+            value = this.day * this.increment;
             if (this.offsetHours) {
                 value += this.hours * 2.14;
             }
@@ -42,8 +48,21 @@ class DayIndicator {
         return value;
     }
 
-    rotateElement() {
-        this.element.style.transform = `rotate(${this.getRotateValue()}deg)`;
+    rotateElement(dir = null) {
+        let rotateVal = 0;
+
+        if (this.settingTime) {
+            rotateVal = this.parent.getCurrentRotateValue(this.element);
+            if (dir) {
+                rotateVal -= this.increment;
+            } else {
+                rotateVal += this.increment;
+            }
+        } else {
+            rotateVal = this.getRotateValue();
+        }
+
+        this.element.style.transform = `rotate(${rotateVal}deg)`;
     }
 
     init() {

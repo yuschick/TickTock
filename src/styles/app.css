@@ -534,22 +534,28 @@ a {
 
 #grande-primary-button,
 #grande-secondary-button,
-#grande-repeater-button {
+#grande-repeater-button,
+#crown-primary-button,
+#crown-secondary-button,
+#crown-button {
     transform: translate(0, 0);
     transition: transform .25s ease;
 }
 
-#grande-primary-button.active {
+#grande-primary-button.active,
+#crown-primary-button.active {
     transform: translate(-3px, 2px);
     transition: transform .1s ease;
 }
 
-#grande-secondary-button.active {
+#grande-secondary-button.active,
+#crown-secondary-button.active {
     transform: translate(-3px, -2px);
     transition: transform .1s ease;
 }
 
-#grande-repeater-button.active {
+#grande-repeater-button.active,
+#crown-button.active {
     transform: translate(3px, -2px);
     transition: transform .1s ease;
 }
